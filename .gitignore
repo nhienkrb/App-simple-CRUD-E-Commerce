@@ -1,0 +1,31 @@
+# --- FRONTEND (React + Vite) ---
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env.local
+frontend/.env.*.local
+frontend/.DS_Store
+
+# --- BACKEND (PHP, Laravel nếu dùng) ---
+backend/vendor/
+backend/storage/
+backend/.env
+backend/.DS_Store
+
+# Nếu dùng Laravel:
+backend/bootstrap/cache/*
+!backend/bootstrap/cache/.gitignore
+
+# --- COMMON ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.local
+
+# OS / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
