@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,9 @@ Route::get('/user', function () {
         ],
         status: 200
     );
+});
+
+Route::prefix('v1')->group(function(){
+    Route::apiResource('products', ProductController::class);
+    Route::get('products/search', [ProductController::class, 'search'])->name('products.search');
 });
