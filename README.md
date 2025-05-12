@@ -1,14 +1,26 @@
 # App-simple-CRUD-E-Commerce
+
+# Install dependencies
 cd frontend
-npm install        # Cài lại node_modules
-npm run dev        # Chạy development server
+npm install
+
+# Install Material UI packages
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
+
+# Run development server
+npm run dev
 
 
 cd backend
-composer install          # Cài lại vendor
+# Install PHP dependencies
+composer install
 
-cp .env.example .env      # Tạo file cấu hình .env (nếu chưa có)
-php artisan key:generate  # Tạo app key
+# Create a copy of the .env file
+cp .env.example .env
+
+# Generate app encryption key
+php artisan key:generate
 
 # Nếu có dùng database:
 php artisan migrate       # Chạy các migration
