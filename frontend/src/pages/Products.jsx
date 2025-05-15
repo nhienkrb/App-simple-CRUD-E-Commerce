@@ -13,7 +13,7 @@ export default function Products() {
 
   return (
     <div>
-      <Container maxWidth="xl" fixed sx={{ justifyContent: "center" }}>
+      <Container maxWidth="xl" fixed sx={{ justifyContent: "center", marginTop: "2rem" }}>
         <Grid container spacing={2}>
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
