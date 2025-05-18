@@ -32,4 +32,9 @@ class Product extends Model
           \logger()->info('Product created: ', $product->toArray());
         }));
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
