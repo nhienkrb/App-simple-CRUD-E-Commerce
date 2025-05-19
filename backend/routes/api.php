@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\ProductController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\OrderDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +35,20 @@ Route::get('/user', function () {
 Route::prefix('v1')->group(function(){
     Route::apiResource('products', ProductController::class);
     Route::get('products/search', [ProductController::class, 'search'])->name('products.search');
+});
+
+Route::prefix('v1')->group(function(){
+    Route::apiResource('categories',CategoryController::class);
+});
+
+Route::prefix('v1')->group(function(){
+    Route::apiResource('orders', OrderController::class);
+});
+
+Route::prefix('v1')->group(function(){
+    Route::apiResource('order-details', OrderDetailController::class);
+});
+
+Route::prefix('v1')->group(function(){
+    Route::apiResource('users', UserController::class);
 });
