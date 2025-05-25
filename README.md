@@ -5,9 +5,10 @@ cd frontend
 npm install
 
 # Install Material UI packages
-npm install @mui/material @emotion/react @emotion/styled
-npm install @mui/icons-material
-
+<p>npm install @mui/material @emotion/react @emotion/styled</p>
+<p>npm install @mui/icons-material</p>
+<p> npm install react-slick --save </p>
+<p>npm install slick-carousel --save</p>
 # Run development server
 npm run dev
 

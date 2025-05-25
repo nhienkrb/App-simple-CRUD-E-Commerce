@@ -2,6 +2,7 @@ import React from "react";
 import Products from "./pages/Products";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Home from "./pages/home/Home";
 
 export default function App() {
   return (
@@ -9,23 +10,9 @@ export default function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route
-            path="/"
-            element={
-              <div>
-                <h1>Home Page</h1> <a href="/products">Go to Products</a>
-              </div>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <div>
-                <h1>Page Not Found</h1> <a href="/">Go Home</a>
-              </div>
-            }
-          />
         </Routes>
       </BrowserRouter>
     </div>
