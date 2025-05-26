@@ -17,7 +17,10 @@ class ProductController extends Controller
         $product = Product::all();
 
         // Return the products as a JSON response
-        return response()->json($product);
+          return response()->json([
+            'message' => 'Product All',
+            'data' => $product,
+        ], 200);
     }
 
     /**
