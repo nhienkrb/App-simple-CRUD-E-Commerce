@@ -28,10 +28,10 @@ export default function Navbar() {
   return (
     <div>
       <AppBar sx={{ backgroundColor: "#7a9c59", position:"static" }} elevation={2}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" disableGutters>
         <Toolbar>
           {isMatch ? (
-            <>
+            <>  
               <Typography>Tea-Plus</Typography>
               <DrawerNavbar page={PAGES}/>
             </>

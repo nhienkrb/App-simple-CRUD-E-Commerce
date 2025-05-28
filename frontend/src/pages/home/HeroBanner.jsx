@@ -12,37 +12,31 @@ export default function HeroBanner() {
     slidesToScroll: 1,
   };
   return (
-    <div className="slider-container" style={{ background: "red"  , height: "300px" }}>
-      <Slider {...settings}>
-        <div>
-          <img
-            src="/bannerTea.png"
-            alt="Banner 1"
-            style={{ width: "100%" , height: "300px", objectFit: "fill"  }}
-          />
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-        <div>
-          <h3>7</h3>
-        </div>
-        <div>
-          <h3>8</h3>
-        </div>
-      </Slider>
-    </div>
+    <Container
+      maxWidth="xl"
+      sx={{
+        mt: 4,
+        mb: 4, // ngăn cuộn ngang
+      }}
+    >
+      <Box style={{ height: "300px", overflow: "hidden" }}>
+        <Slider {...settings}>
+          <Box>
+            <img
+              src="https://theme.hstatic.net/200000411483/1000786878/14/slider_2.jpg?v=313"
+              alt="Banner 1"
+              style={{ width: "100%", height: "300px", objectFit: "fill" }}
+            />
+          </Box>
+          <div>
+            <img
+              src="https://theme.hstatic.net/200000411483/1000786878/14/slider_3.jpg?v=313"
+              alt="Banner2"
+              style={{ width: "100%", height: "300px", objectFit: "fill" }}
+            />
+          </div>
+        </Slider>
+      </Box>
+    </Container>
   );
 }

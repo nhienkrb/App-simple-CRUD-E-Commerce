@@ -16,7 +16,7 @@ const favoriteIcon = {
   right: 10,
   color: "rgba(229, 229, 229, 0.67)",
   borderRadius: "50%",
-  border: "1px solid rgba(229, 229, 229, 0.15)",
+  border: "1px solid rgba(229, 229, 229, 0.25)",
   padding: 1,
   cursor: "pointer",
   "&:hover": {
@@ -34,7 +34,7 @@ export default function ProductCard({ product }) {
     display: product.is_active ? "block" : "none",
     borderRadius: "50%",
     backgroundColor: "#7eae1d",
-    padding: "7px 10px",
+    padding: "5px 10px",
     color: "white",
     fontWeight: "bold",
     fontSize: "1rem",
@@ -45,7 +45,7 @@ export default function ProductCard({ product }) {
     padding: "7px 10px",
     fontWeight: "bold",
     fontSize: "1rem",
-    width: "91%",
+    width: "100%",
     height: "15%",
     backgroundColor: "rgba(255, 255, 255, 0.5)", // nền trắng mờ
     display: product.is_active ? "none" : "flex",
@@ -54,9 +54,7 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div>
-      <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-        <Box
+        <Box flexGrow={1}
           sx={{
             position: "relative",
             display: "flex",
@@ -68,7 +66,8 @@ export default function ProductCard({ product }) {
         >
           <Card
             sx={{
-              maxWidth: 400,
+              width:"100%",
+              maxWidth: "100%",
               color: {
                 xs: "red", // màu đỏ khi ở xs
                 sm: "inherit", // từ sm trở lên, dùng màu mặc định
@@ -81,7 +80,7 @@ export default function ProductCard({ product }) {
               alt={product.name}
               height="180"
             />
-            <FavoriteIcon sx={favoriteIcon} />
+            <FavoriteIcon fontSize="large" sx={favoriteIcon} />
             <Box sx={sale}> -5 </Box>
             <Box sx={outOfStock}>
               <Typography variant="h6" fontWeight="bold" color="black">
@@ -107,8 +106,8 @@ export default function ProductCard({ product }) {
                     color: "rgb(206, 58, 58)",
                     "&:hover": {
                       color: "white",
-                      background: "rgb(24, 189, 46)",
-                      borderColor: "rgb(24, 189, 46)",
+                      background:"#7a9c59",
+                      borderColor:"#7a9c59",
                     },
                   }}
                 >
@@ -118,7 +117,5 @@ export default function ProductCard({ product }) {
             </CardContent>
           </Card>
         </Box>
-      </Grid>
-    </div>
   );
 }
