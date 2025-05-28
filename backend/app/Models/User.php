@@ -42,4 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function loyaltyPoints()
+    {
+        return $this->hasOne(LoyaltyPoints::class);
+    }
+    public function promotions()
+    {
+        return $this->hasMany(Promotions::class);
+    }
 }
