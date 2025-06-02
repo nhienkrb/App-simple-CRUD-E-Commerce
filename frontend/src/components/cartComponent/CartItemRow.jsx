@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, Box, IconButton, TableCell, TableRow, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 
-export default function CartItemRow({ row, deleteItem }) {
+export default function CartItemRow({ product, deleteItem }) {
   return (
     <TableRow
       hover={true}
@@ -13,7 +13,7 @@ export default function CartItemRow({ row, deleteItem }) {
     >
       <TableCell sx={{ width: "1rem" }}>
         <IconButton
-          onClick={() => deleteItem(row.productName)}
+          onClick={() => deleteItem(product.product.id)}
           aria-label="delete"
           size="medium"
         >
@@ -23,26 +23,26 @@ export default function CartItemRow({ row, deleteItem }) {
       <TableCell>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Avatar
-            src={row.image || "https://product.hstatic.net/200000305259/product/tee_pnk_1_61930d8deef94b2087c0a11f3b3aa02a_large.jpg"}
+            src={product.product.image || "https://product.hstatic.net/200000305259/product/tee_pnk_1_61930d8deef94b2087c0a11f3b3aa02a_large.jpg"}
             sx={{ marginRight: 2, backgroundColor: "red" }}
             variant="rounded"
           />
           <Box>
             <Typography variant="body1" fontWeight={600}>
-              {row.productName}
+              {product.product.product_name || "none"}
             </Typography>
               <Typography variant="body2" color="text.secondary">
-                Size: {row.size}
+                Size: {product.product.size || "none"}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Color: {row.color}
+                Color: {product.product.color || "none"}
               </Typography>
           </Box>
         </Box>
       </TableCell>
-      <TableCell align="center">{row.quantity}</TableCell>
-      <TableCell align="center">{row.price}</TableCell>
-      <TableCell align="center">{row.quantity * row.price}</TableCell>
+      <TableCell align="center">{product.product.quantity}</TableCell>
+      <TableCell align="center">{product.product.price}</TableCell>
+      <TableCell align="center">{(product.product.quantity * product.product.price).toFixed(2)}</TableCell>
     </TableRow>
   );
 }

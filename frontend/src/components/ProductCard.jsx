@@ -10,6 +10,7 @@ import {
   Avatar,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useCart } from "../context/CartContext";
 const favoriteIcon = {
   position: "absolute",
   top: 10,
@@ -27,6 +28,8 @@ const favoriteIcon = {
 };
 
 export default function ProductCard({ product }) {
+  const { addItem } = useCart();
+
   const sale = {
     position: "absolute",
     top: "15%",
@@ -54,68 +57,69 @@ export default function ProductCard({ product }) {
   };
 
   return (
-        <Box flexGrow={1}
-          sx={{
-            position: "relative",
-            display: "flex",
-            justifyContent: {
-              xs: "center", // căn giữa trên mobile
-              sm: "flex-start", // từ sm trở lên thì không căn giữa
-            },
-          }}
-        >
-          <Card
-            sx={{
-              width:"100%",
-              maxWidth: "100%",
-              color: {
-                xs: "red", // màu đỏ khi ở xs
-                sm: "inherit", // từ sm trở lên, dùng màu mặc định
-              },
-            }}
-          >
-            <CardMedia
-              component="img"
-              image={product.image}
-              alt={product.name}
-              height="180"
-            />
-            <FavoriteIcon fontSize="large" sx={favoriteIcon} />
-            <Box sx={sale}> -5 </Box>
-            <Box sx={outOfStock}>
-              <Typography variant="h6" fontWeight="bold" color="black">
-                HẾT HÀNG
-              </Typography>
-            </Box>
-            <CardContent>
-              <Typography variant="subtitle2" color="text.secondary">
-                {new Date(product.created_at).toLocaleDateString("vi-Vn")}
-              </Typography>
-              <Typography variant="body1" fontWeight="bold">
-                {product.product_name}
-              </Typography>
-              <Typography variant="h6" color="error" fontWeight={700}>
-                {product.price.toLocaleString()} ₫
-              </Typography>
-              <Box mt={1}>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{
-                    borderColor: "rgb(206, 58, 58)",
-                    color: "rgb(206, 58, 58)",
-                    "&:hover": {
-                      color: "white",
-                      background:"#7a9c59",
-                      borderColor:"#7a9c59",
-                    },
-                  }}
-                >
-                  Add to Cart
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
+    <Box
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: {
+          xs: "center", // căn giữa trên mobile
+          sm: "flex-start", // từ sm trở lên thì không căn giữa
+        },
+      }}
+    >
+      <Card
+        sx={{
+          width: "100%",
+          maxWidth: "100%",
+          color: {
+            xs: "red", // màu đỏ khi ở xs
+            sm: "inherit", // từ sm trở lên, dùng màu mặc định
+          },
+        }}
+      >
+        <CardMedia
+          component="img"
+          image={product.image}
+          alt={product.name}
+          height="180"
+        />
+        <FavoriteIcon fontSize="large" sx={favoriteIcon} />
+        <Box sx={sale}> -5 </Box>
+        <Box sx={outOfStock}>
+          <Typography variant="h6" fontWeight="bold" color="black">
+            HẾT HÀNG
+          </Typography>
         </Box>
+        <CardContent>
+          <Typography variant="subtitle2" color="text.secondary">
+            {new Date(product.created_at).toLocaleDateString("vi-Vn")}
+          </Typography>
+          <Typography variant="body1" fontWeight="bold">
+            {product.product_name}
+          </Typography>
+          <Typography variant="h6" color="error" fontWeight={700}>
+            {product.price.toLocaleString()} ₫
+          </Typography>
+          <Box mt={1}>
+            <Button
+              onClick={() => addItem({ product })}
+              variant="outlined"
+              size="small"
+              sx={{
+                borderColor: "rgb(206, 58, 58)",
+                color: "rgb(206, 58, 58)",
+                "&:hover": {
+                  color: "white",
+                  background: "#7a9c59",
+                  borderColor: "#7a9c59",
+                },
+              }}
+            >
+              Add to Cart
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }

@@ -36,8 +36,8 @@ export default function CartTable({ cartItems, deleteItem }) {
         </TableHead>
         <TableBody>
           {cartItems && cartItems.length > 0 ? (
-            cartItems.map((row) => (
-              <CartItemRow key={row.productName} row={row} deleteItem={deleteItem} />
+            cartItems.map((product) => (
+              <CartItemRow key={product.product.id} product={product} deleteItem={deleteItem} />
             ))
           ) : (
             <TableRow>

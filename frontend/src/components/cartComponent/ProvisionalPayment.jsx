@@ -4,7 +4,7 @@ import { useCart } from "../../context/CartContext";
 import { Link as RouterLink } from "react-router-dom";
 
 export default function ProvisionalPayment() {
-  const { countCartItems } = useCart();
+  const { countCartItems, getTotalPrice } = useCart();
 
   return (
     <>
@@ -26,18 +26,18 @@ export default function ProvisionalPayment() {
             </span>
           </Typography>
 
-          <Typography sx={{ mb: 5, fontWeight: "bold", fontSize: "1em" }}>
-            <span style={{ color: "#c9ae63" }}>Provisional Payment</span>
-            <span
-              style={{
-                float: "right",
+          <Box sx={{ mb: 5, fontWeight: "bold", fontSize: "1em", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <span style={{ color: "#c9ae63", }}>Provisional Payment</span>
+            <span style={{
                 fontWeight: "bold",
                 marginLeft: "10rem",
               }}
             >
-              Rs. 0.00
+              {typeof getTotalPrice === "function"
+                ? getTotalPrice().toLocaleString() + " $"
+                : 0}
             </span>
-          </Typography>
+          </Box>
         </Box>
       </Grid>
 

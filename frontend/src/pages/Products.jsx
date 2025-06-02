@@ -5,13 +5,11 @@ import useQuery from "../hooksCustom/useQuery";
 
 const API_URL = "http://localhost:8000/api/v1/products";
 export default function Products() {
-    const [query, updateQuery, resetQuery] = useQuery(
-    {
-      page: 1,
-      limit: 10,
-      sort: "title",
-    }
-  );
+  const [query, updateQuery, resetQuery] = useQuery({
+    page: 1,
+    limit: 10,
+    sort: "title",
+  });
   const products = useFetchList(API_URL, { method: "GET" });
 
   return (
@@ -23,7 +21,9 @@ export default function Products() {
       >
         <Grid container spacing={2}>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <Grid  size={{ xs: 12, sm: 4, md:2.4, lg: 2 }}  key={product.id}>
+              <ProductCard key={product.id} product={product} />
+            </Grid>
           ))}
         </Grid>
       </Container>
