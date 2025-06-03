@@ -5,6 +5,10 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/home/Home";
 import ShoppingCart from "./pages/shopping-cart/ShoppingCart";
 import { CartProvider } from "./context/CartContext";
+import News from "./pages/news/NEws";
+import Contact from "./pages/contact/Contact";
+import Footer from "./components/footer/Footer";
+import FloatingSocialButtons from "./components/FloatingSocialButtons";
 
 export default function App() {
   return (
@@ -17,7 +21,11 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<ShoppingCart />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
+          <FloatingSocialButtons />
+          <Footer/>
         </CartProvider>
       </BrowserRouter>
     </div>

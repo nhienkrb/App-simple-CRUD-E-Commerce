@@ -23,7 +23,7 @@ import { useCart } from "../context/CartContext";
 const PAGES = [
   { label: "Home", path: "/home" },
   { label: "Product", path: "/products" },
-  { label: "Service", path: "/services" },
+  { label: "News", path: "/news" },
   { label: "Contact", path: "/contact" },
 ];
 export default function Navbar() {

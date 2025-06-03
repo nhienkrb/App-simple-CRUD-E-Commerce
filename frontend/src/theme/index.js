@@ -8,6 +8,7 @@ const theme = createTheme({
       error: "#ff0000",
       white: "#ffffff",
       black: "#000000",
+      nav:"#7a9c59"
 
     },
     secondary: {
