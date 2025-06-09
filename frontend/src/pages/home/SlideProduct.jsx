@@ -21,11 +21,12 @@ export default function SlideProduct() {
     speed: 6000,
     autoplaySpeed: 6000,
     cssEase: "linear",
-    dots:false
+    dots:false,
+    arrows: false,
   };
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>\
+    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
       <LineCut nameLine="SẢN PHẨM NỔI BẬT" />
     <div className="slider-container" >
       <Slider {...settings} >
