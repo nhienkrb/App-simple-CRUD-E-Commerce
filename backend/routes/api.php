@@ -50,9 +50,14 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
     Route::get('products/search', [ProductController::class, 'search'])->name('products.search');
-
+    Route::get('products/slug/{slug}', [ProductController::class, 'findBySlug'])->name('products.findBySlug');
+ 
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('order-details', OrderDetailController::class);
     Route::apiResource('users', UserController::class);
+});
+
+//API routes custom
+Route::prefix('v1')->group(function () {
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,15 +12,22 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     protected $productService;
+     public final function __construct(ProductService $productService)
+     {
+         // Inject the ProductService into the controller
+         $this->productService = $productService;
+     }
     public function index()
     {
         // Fetch all products from the database
-        $product = Product::all();
+        $products = $this->productService->getAll();
 
         // Return the products as a JSON response
           return response()->json([
             'message' => 'Product All',
-            'data' => $product,
+            'data' => $products,
         ], 200);
     }
 
@@ -47,7 +55,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product = Product::find($product->id);  // Dùng tìm kiếm theo ID
+        $product = $this->productService->find($product->id);
 
         if ($product == null) {
             // Trả về JSON với mã lỗi 404 khi không tìm thấy sản phẩm
@@ -93,7 +101,7 @@ class ProductController extends Controller
         // Kiểm tra nếu sản phẩm tồn tại
         if ($product) {
             // Xóa sản phẩm
-            $product->delete();
+            $this->productService->delete($product->id);
 
             // Trả về phản hồi JSON xác nhận xóa thành công
             return response()->json([
@@ -105,5 +113,31 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'Product not found.'
         ], 404);
+    }
+
+    public function findBySlug( $slug)
+    {
+
+        // Kiểm tra xem slug có được cung cấp hay không
+        if (empty($slug)) {
+            return response()->json([
+                'message' => 'Slug is required',
+            ], 400);
+        }
+        // Tìm sản phẩm theo slug
+        $product = $this->productService->findBySlug($slug);
+        if ($product == null) {
+            // Trả về JSON với mã lỗi 404 khi không tìm thấy sản phẩm
+            return response()->json([
+                'message' => 'Product not found',
+            ], 404);
+        }
+
+        // Trả về thông tin sản phẩm dưới dạng JSON
+        return response()->json([
+            'message' => 'Product found',
+
+            'data' => $product,
+        ],200);
     }
 }

@@ -1,13 +1,10 @@
-import { Container, Typography, Box } from "@mui/material";
-import React from "react";
-import Slider from "react-slick";
-import { Link as RouterLink } from "react-router-dom";
+import { Box } from "@mui/material";
 import ProductCard from "../../components/ProductCard";
 import useFetchList from "../../hooksCustom/useFetchList";
-import LineCut from "../../components/LineCut";
+import Slider from "react-slick";
 
-export default function SlideProduct() {
- const API_URL = import.meta.env.VITE_API_URL + "/products";
+export default function ProductRecommend() {
+  const API_URL = import.meta.env.VITE_API_URL + "/products";
   const products = useFetchList(API_URL, { method: "GET" });
   if (!products || products.length === 0) {
     return <Box>No recommended products available.</Box>;
@@ -25,8 +22,6 @@ export default function SlideProduct() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>\
-      <LineCut nameLine="SẢN PHẨM NỔI BẬT" />
     <div className="slider-container" >
       <Slider {...settings} >
         {products.map((product) => (
@@ -36,6 +31,5 @@ export default function SlideProduct() {
         ))}
       </Slider>
     </div>
-   </Container>
   );
 }

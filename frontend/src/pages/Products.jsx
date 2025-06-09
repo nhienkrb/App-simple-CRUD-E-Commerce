@@ -3,7 +3,7 @@ import ProductCard from "../components/ProductCard";
 import useFetchList from "../hooksCustom/useFetchList";
 import useQuery from "../hooksCustom/useQuery";
 
-const API_URL = "http://localhost:8000/api/v1/products";
+const API_URL = import.meta.env.VITE_API_URL + "/products";
 export default function Products() {
   const [query, updateQuery, resetQuery] = useQuery({
     page: 1,

@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'UTM Seagull';
+  src: url('../public/fonts/UTM-SeagullBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.slick-dots li{
+  margin: 0 20px !important;
+}
+.MuiBox-root.css-166rfdl {
+  margin-left: 20px !important;
+}
+
+
+
+
+.slick-next{
+  background-color: #000 !important;
+  border-radius: 50% !important;
+}
+.slick-prev{
+  background-color: #000 !important;
+  border-radius: 50% !important;
+}

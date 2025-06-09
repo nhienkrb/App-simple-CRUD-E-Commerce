@@ -9,7 +9,9 @@ import News from "./pages/news/NEws";
 import Contact from "./pages/contact/Contact";
 import Footer from "./components/footer/Footer";
 import FloatingSocialButtons from "./components/FloatingSocialButtons";
-
+import LayoutProductDetail from "./pages/product-detail/LayoutProductDetail";
+import ProductDetail from "./pages/product-detail/ProductDetail";
+import NoPage from "./pages/NoPage";
 export default function App() {
   return (
     <div>
@@ -23,9 +25,14 @@ export default function App() {
             <Route path="/cart" element={<ShoppingCart />} />
             <Route path="/news" element={<News />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/product" element={<LayoutProductDetail />}>
+              <Route index element={<Products />} />
+              <Route path=":slug" element={<ProductDetail />} />
+            </Route>
+            <Route path="*" element={<NoPage />} />
           </Routes>
           <FloatingSocialButtons />
-          <Footer/>
+          <Footer />
         </CartProvider>
       </BrowserRouter>
     </div>

@@ -4,7 +4,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#ff1a1a",
-      sucess: "#009900",
+      success: "#009900",
       error: "#ff0000",
       white: "#ffffff",
       black: "#000000",
@@ -16,8 +16,40 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: `'Roboto', 'Arial', sans-serif`,
+    fontFamily:'roboto, sans-serif',    
+    h1: {
+      fontSize: "2rem",
+      fontWeight: "bold",
+    },
+    h2: {
+      fontSize: "1.5rem",
+      fontWeight: "bold",
+    },
+    h3: {
+      fontSize: "1.25rem",
+      fontWeight: "bold",
+    },
+    h4: {
+      fontSize: "1.125rem",
+      fontWeight: "bold",
+    },
+    h5: {
+      fontSize: "1rem",
+      fontWeight: "bold",
+    },
+    h6: {
+      fontSize: "0.875rem",
+      fontWeight: "bold",
+    },
     
+    body1: {
+      fontSize: "1rem",
+      lineHeight: 1.5,
+    },
+    body2: {
+      fontSize: "0.875rem",
+      lineHeight: 1.4,
+    },
   },
   
 });

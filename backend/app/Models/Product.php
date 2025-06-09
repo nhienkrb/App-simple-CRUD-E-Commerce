@@ -42,4 +42,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductVariant::class);
     }
+
+    public function inforProduct()
+{
+    return $this->hasOne(InforProduct::class, 'product_id');
+}
 }

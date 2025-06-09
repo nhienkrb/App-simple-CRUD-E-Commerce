@@ -10,6 +10,7 @@ import {
   Avatar,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import {Link as RouteLink } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 const favoriteIcon = {
   position: "absolute",
@@ -94,7 +95,7 @@ export default function ProductCard({ product }) {
           <Typography variant="subtitle2" color="text.secondary">
             {new Date(product.created_at).toLocaleDateString("vi-Vn")}
           </Typography>
-          <Typography variant="body1" fontWeight="bold">
+          <Typography component={RouteLink} sx={{ textDecoration: "none",}} color="inherit" variant="body1"  fontWeight="bold" to={`/product/${product.slug}`}>
             {product.product_name}
           </Typography>
           <Typography variant="h6" color="error" fontWeight={700}>

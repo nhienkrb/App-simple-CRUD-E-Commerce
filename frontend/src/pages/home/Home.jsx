@@ -11,6 +11,7 @@ export default function Home() {
       <ProductCatalog />
       <ProductList />
       <Promotions />
+    
       <SlideProduct />
     </div>
   );

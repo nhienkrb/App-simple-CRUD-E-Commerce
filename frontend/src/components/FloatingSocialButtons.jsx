@@ -9,11 +9,11 @@ const FloatingSocialButtons = () => {
     <Box
       sx={{
         position: 'fixed',     // bám cố định vào màn hình
-        top: '35%',            // cách đỉnh trang 35%
-        left: 10,              // cách mép trái 10px
+        bottom: '7%',            // cách đỉnh trang 7%
+        right: 10,              // cách mép trái 10px
         display: 'flex',
         flexDirection: 'column',
-        gap: 2,
+        gap: 3,
         zIndex: 1000,          // nổi trên các thành phần khác
       }}
     >
