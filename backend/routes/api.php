@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,18 +47,20 @@ Route::middleware('auth:sanctum')->group(function () {
     })->name('verification.send');
 });
 
+//API routes custom products controller
+Route::controller(ProductController::class)->prefix('v1/products')->group(function () {
+    Route::get('search', 'search')->name('products.search');
+    Route::get('slug/{slug}', 'findBySlug')->name('products.findBySlug');
+    Route::get('filter-products', 'filterProduct')->name('products.filterProduct');
+});
+
+
 // API resources with versioning
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
-    Route::get('products/search', [ProductController::class, 'search'])->name('products.search');
-    Route::get('products/slug/{slug}', [ProductController::class, 'findBySlug'])->name('products.findBySlug');
- 
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('order-details', OrderDetailController::class);
     Route::apiResource('users', UserController::class);
 });
 
-//API routes custom
-Route::prefix('v1')->group(function () {
-});

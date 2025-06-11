@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\Product;
 use Illuminate\Support\Str;
 
@@ -13,7 +14,7 @@ class ProductService
 
     public function create(array $data)
     {
-         $data['slug'] = Str::slug($data['name'], '-');
+        $data['slug'] = Str::slug($data['name'], '-');
         return Product::create($data);
     }
 
@@ -44,4 +45,31 @@ class ProductService
         }
         return $product;
     }
+
+public function filterProduct(array $filters)
+{
+    $query = Product::query();
+
+    // Sắp xếp
+    if (isset($filters['sort'])) {
+        switch ($filters['sort']) {
+            case 'name_asc':
+                $query->orderBy('product_name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('product_name', 'desc');
+                break;
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+        }
+    }
+
+    // Phân trang
+    $limit = $filters['limit'] ?? 10;
+    return $query->paginate($limit);
+}
 }

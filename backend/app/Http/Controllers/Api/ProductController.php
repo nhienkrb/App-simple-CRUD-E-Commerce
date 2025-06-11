@@ -13,19 +13,19 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
 
-     protected $productService;
-     public final function __construct(ProductService $productService)
-     {
-         // Inject the ProductService into the controller
-         $this->productService = $productService;
-     }
+    protected $productService;
+    public final function __construct(ProductService $productService)
+    {
+        // Inject the ProductService into the controller
+        $this->productService = $productService;
+    }
     public function index()
     {
         // Fetch all products from the database
         $products = $this->productService->getAll();
 
         // Return the products as a JSON response
-          return response()->json([
+        return response()->json([
             'message' => 'Product All',
             'data' => $products,
         ], 200);
@@ -115,7 +115,7 @@ class ProductController extends Controller
         ], 404);
     }
 
-    public function findBySlug( $slug)
+    public function findBySlug($slug)
     {
 
         // Kiểm tra xem slug có được cung cấp hay không
@@ -138,6 +138,18 @@ class ProductController extends Controller
             'message' => 'Product found',
 
             'data' => $product,
-        ],200);
+        ], 200);
     }
+
+
+    public function filterProduct(Request $request)
+    {
+        $filters = $request->only(['page', 'limit', 'sort']);
+        $product = $this->productService->filterProduct($filters);
+        return response()->json([
+            'message' => 'Product filtered successfully',
+            'data' => $product,
+        ], 200);
+    }
+
 }
