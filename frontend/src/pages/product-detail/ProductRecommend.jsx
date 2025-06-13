@@ -18,7 +18,8 @@ export default function ProductRecommend() {
     speed: 6000,
     autoplaySpeed: 6000,
     cssEase: "linear",
-    dots:false
+    dots:false,
+    arrows:false
   };
 
   return (
