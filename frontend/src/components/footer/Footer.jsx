@@ -3,7 +3,7 @@ import { Box, Grid, Typography, Link } from '@mui/material';
 
 const Footer = () => {
   return (
-    <Box sx={{ backgroundColor: '#f5f2ed', p: 4 }}>
+    <Box sx={{p: 4 , borderTop: "1px solid #ccc", mt:6}}>
       <Grid container spacing={4}>
         {/* Về chúng tôi */}
         <Grid size={{xs:12, sm:6, md:3}}>
