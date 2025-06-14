@@ -13,8 +13,9 @@
 }
 
 
-
-
+body{
+background: url("../public/img/bg-body-left2.png") top left no-repeat, url("../public/img/bg-body-re.png") 0 0 repeat;
+}
 .slick-next{
   background-color: #000 !important;
   border-radius: 50% !important;
@@ -22,4 +23,8 @@
 .slick-prev{
   background-color: #000 !important;
   border-radius: 50% !important;
+}
+
+.MuiButtonBase-root .MuiAccordionSummary-root .MuiAccordionSummary-gutters .css-1t24edw-MuiButtonBase-root-MuiAccordionSummary-root{
+  padding-left: 0px !important;
 }
