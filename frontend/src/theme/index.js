@@ -8,8 +8,8 @@ const theme = createTheme({
       error: "#ff0000",
       white: "#ffffff",
       black: "#000000",
-      nav:"#7a9c59"
-
+      nav:"#7a9c59",
+      coal: "#2E2E2E"
     },
     secondary: {
       main: "#f50057",
