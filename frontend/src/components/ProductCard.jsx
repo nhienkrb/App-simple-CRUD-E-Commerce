@@ -76,6 +76,7 @@ export default function ProductCard({ product }) {
             xs: "red", // màu đỏ khi ở xs
             sm: "inherit", // từ sm trở lên, dùng màu mặc định
           },
+          marginBottom:2
         }}
       >
         <CardMedia
@@ -95,7 +96,15 @@ export default function ProductCard({ product }) {
           <Typography variant="subtitle2" color="text.secondary">
             {new Date(product.created_at).toLocaleDateString("vi-Vn")}
           </Typography>
-          <Typography component={RouteLink} sx={{ textDecoration: "none",}} color="inherit" variant="body1"  fontWeight="bold" to={`/product/${product.slug}`}>
+          <Typography component={RouteLink} 
+          sx={{   textDecoration: "none",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical", // 	Xác định hiển thị theo chiều dọc
+                  WebkitLineClamp: 2, // 👈 giới hạn 2 dòng
+                  overflow: "hidden",
+                   textOverflow: "ellipsis", 
+                  height: "3rem", // 👈 đảm bảo mọi card cao bằng nhau 
+                  }} color="inherit" variant="body1"  fontWeight="600" to={`/product/${product.slug}`}>
             {product.product_name}
           </Typography>
           <Typography variant="h6" color="error" fontWeight={700}>
