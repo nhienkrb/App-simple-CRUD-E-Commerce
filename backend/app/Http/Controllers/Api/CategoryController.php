@@ -102,7 +102,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-       $category = $this->categoryService->delete($id);
+        $category = $this->categoryService->delete($id);
         if ($category == null) {
             // Return a JSON response with a 404 error code when the category is not found
             return response()->json([
@@ -114,5 +114,15 @@ class CategoryController extends Controller
             'data' => $category,
             'message' => 'Category deleted successfully',
         ], 200);
+    }
+
+
+    public function getNames(CategoryService $categoryService)
+    {
+        $names = $categoryService->getCategoryName_ProductTagName();
+        return response()->json([
+            'data' => $names,
+             'message' => 'Category deleted successfully',
+        ]);
     }
 }

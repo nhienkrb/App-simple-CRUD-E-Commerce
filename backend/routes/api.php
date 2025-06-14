@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\Category;
 use App\Models\Product;
 
 /*
@@ -54,6 +55,9 @@ Route::controller(ProductController::class)->prefix('v1/products')->group(functi
     Route::get('filter-products', 'filterProduct')->name('products.filterProduct');
 });
 
+Route::controller(CategoryController::class) ->prefix('v1/categories')->group(function(){
+    Route::get('names', 'getNames')->name('categories.getNames');
+});
 
 // API resources with versioning
 Route::prefix('v1')->group(function () {
