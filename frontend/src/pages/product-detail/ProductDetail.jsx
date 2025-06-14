@@ -111,7 +111,7 @@ export default function ProductDetail() {
       </Grid>
       <Grid size={{ xs: 12, sm: 12, md:12 }} mt={ 5}>
         <ProductRecommend />
-      </Grid>
+      </Grid> 
 
            <Grid size={{ xs: 12, sm: 12, md: 12 }} mt={5}>
         <LineCut nameLine="TEA-PLUS" fontSize="h1"/>
