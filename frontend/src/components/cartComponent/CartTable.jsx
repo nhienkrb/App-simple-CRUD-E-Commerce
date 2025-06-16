@@ -11,8 +11,15 @@ import {
 import CartItemRow from "./CartItemRow";
 
 export default function CartTable({ cartItems, deleteItem }) {
+
+  const totalPrice = 0;
+
+  const countTotalPrice   =  (price)=>{
+    return  totalPrice + price;
+  }
+
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{backgroundColor:"#f5f5f5"}}>
       <Table sx={{ minWidth: 650 }} aria-label="cart table">
         <caption>Shopping Cart Table</caption>
         <TableHead>
@@ -36,8 +43,8 @@ export default function CartTable({ cartItems, deleteItem }) {
         </TableHead>
         <TableBody>
           {cartItems && cartItems.length > 0 ? (
-            cartItems.map((product) => (
-              <CartItemRow key={product.product.id} product={product} deleteItem={deleteItem} />
+            cartItems.map((product, index) => (
+              <CartItemRow key={index} product={product} deleteItem={deleteItem} countTotalPrice={countTotalPrice}  />
             ))
           ) : (
             <TableRow>

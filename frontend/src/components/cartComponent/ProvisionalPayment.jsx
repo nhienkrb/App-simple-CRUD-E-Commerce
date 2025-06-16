@@ -3,7 +3,7 @@ import React from "react";
 import { useCart } from "../../context/CartContext";
 import { Link as RouterLink } from "react-router-dom";
 
-export default function ProvisionalPayment() {
+export default function ProvisionalPayment({setShowCheckout}) {
   const { countCartItems, getTotalPrice } = useCart();
 
   return (
@@ -78,6 +78,7 @@ export default function ProvisionalPayment() {
           mb={5}
         >
           <Button
+            onClick={() => setShowCheckout(true)} // 👈
             variant="contained"
             sx={{
               boxShadow: 0,
