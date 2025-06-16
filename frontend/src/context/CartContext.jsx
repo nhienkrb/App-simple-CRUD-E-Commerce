@@ -14,36 +14,67 @@ function createData(productName, quantity, price, totalPrice) {
 // ];
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(()=>{
-    const stored  = localStorage.getItem("cartItems");
+  const [cartItems, setCartItems] = useState(() => {
+    const stored = localStorage.getItem("cartItems");
     return stored ? JSON.parse(stored) : [];
   });
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
- 
+
   const addItem = (item) => {
-    setCartItems((prev) => [...prev, item]);
+    if (item.product.is_active === 0) {
+      alert("Sản phẩm đã hết");
+      return;
+    }
+
+    const itemAddToCart = {
+      id: item.product.id,
+      product_name: item.product.product_name,
+      price: item.product.price,
+      is_active: item.product.is_active,
+      image: item.product.image,
+      quantity: 1,
+    };
+
+    setCartItems((prevCartItems) => {
+      const existingItem = prevCartItems.find(
+        (cartItem) => cartItem.id === itemAddToCart.id
+      );
+
+      if (existingItem) {
+        // Map tạo mảng mới, không mutate
+        return prevCartItems.map((cartItem) =>
+          cartItem.id === itemAddToCart.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      }
+
+      return [...prevCartItems, itemAddToCart];
+    });
   };
 
   const deleteItem = (productId) => {
-    const updated = cartItems.filter(
-      (item) => item.product.id !== productId
-    );
+    const updated = cartItems.filter((item) => item.id !== productId);
     setCartItems(updated);
   };
 
   const countCartItems = () => {
-    return cartItems.reduce((total, item) => total + item.product.quantity, 0);
-  }
-
-  const getTotalPrice = ()=>{
-    return cartItems.reduce((total,item)=>total + (item.product.price * item.product.quantity), 0);
-  }
+    return cartItems.reduce((total, item) => total + (item.quantity), 0);
+  };
+  const getTotalPrice = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
 
   return (
-    <CartContext.Provider value={{ cartItems, addItem, deleteItem,countCartItems,getTotalPrice }}>
+    <CartContext.Provider
+      value={{ cartItems, addItem, deleteItem, countCartItems, getTotalPrice }}
+    >
       {children}
     </CartContext.Provider>
   );
