@@ -16,20 +16,16 @@ class OrderController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $orders = $this->orderService->getAll();
+        $orders = $this->orderService->getAllOrders();
         return response()->json($orders);
     }
 
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_email' => 'required|email',
-            'total' => 'required|numeric',
-            // Add other fields as needed
-        ]);
-        $order = $this->orderService->create($validated);
+        $dataRequest =  $request->all();
+
+        $order = $this->orderService->createOrder($dataRequest);
         return response()->json([
             'message' => 'Order created successfully',
             'data' => $order,
@@ -39,7 +35,7 @@ class OrderController extends Controller
     // Display the specified resource.
     public function show($id)
     {
-        $order = $this->orderService->find($id);
+        $order = $this->orderService->findOrder($id);
         if (!$order) {
             return response()->json(['message' => 'Order not found'], 404);
         }
@@ -49,7 +45,7 @@ class OrderController extends Controller
     // Update the specified resource in storage.
     public function update(Request $request , string $id)
     {
-        $order = $this->orderService->find($id);
+        $order = $this->orderService->findOrder($id);
         if (!$order) {
             return response()->json(['message' => 'Order not found'], 404);
         }
@@ -59,7 +55,7 @@ class OrderController extends Controller
             'total' => 'sometimes|required|numeric',
             // Add other fields as needed
         ]);
-        $this->orderService->update($order, $validated);
+        $this->orderService->updateOrder($order, $validated);
         return response()->json([
             'message' => 'Order updated successfully',
             'data' => $order,
@@ -69,11 +65,16 @@ class OrderController extends Controller
     // Remove the specified resource from storage.
     public function destroy(string $id)
     {
-        $order = $this->orderService->find($id);
+        $order = $this->orderService->findOrder($id);
         if (!$order) {
             return response()->json(['message' => 'Order not found'], 404);
         }
         $order->delete();
         return response()->json(['message' => 'Order deleted successfully']);
+    }
+
+    public function orderItems(Request $request){
+
+        return response()->json(["data"=> $this->orderService->orderItem($request->all())]);
     }
 }

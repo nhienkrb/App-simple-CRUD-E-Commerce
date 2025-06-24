@@ -10,7 +10,7 @@ class OrderDetail extends Model
     use HasFactory;
     protected $table = 'order_details';
     public $timestamps = true;
-    protected $dateFormat = 'd-m-Y H:i:s';
+    protected $dateFormat = 'Y-m-d H:i:s';
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

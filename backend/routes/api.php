@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\UserController;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 
 /*
@@ -55,9 +56,17 @@ Route::controller(ProductController::class)->prefix('v1/products')->group(functi
     Route::get('filter-products', 'filterProduct')->name('products.filterProduct');
 });
 
-Route::controller(CategoryController::class) ->prefix('v1/categories')->group(function(){
+Route::controller(CategoryController::class)->prefix('v1/categories')->group(function () {
     Route::get('names', 'getNames')->name('categories.getNames');
 });
+
+Route::middleware('auth:sanctum')
+    ->prefix('v1/orders')
+    ->controller(OrderController::class)
+    ->group(function () {
+        Route::post('order-items', 'orderItems')->name('order.orderItems');
+    });
+
 
 // API resources with versioning
 Route::prefix('v1')->group(function () {
@@ -67,4 +76,3 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('order-details', OrderDetailController::class);
     Route::apiResource('users', UserController::class);
 });
-
