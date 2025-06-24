@@ -25,6 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
     ];
 
+    protected $with = ['loyaltyPoints'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
