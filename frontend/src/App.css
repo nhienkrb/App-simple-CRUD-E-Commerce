@@ -13,8 +13,12 @@
 }
 
 
-body{
+html, body{
 background: url("../public/img/bg-body-left2.png") top left no-repeat, url("../public/img/bg-body-re.png") 0 0 repeat;
+ margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* chặn cuộn ngang */
+  height: 100%;
 }
 .slick-next{
   background-color: #000 !important;
@@ -28,3 +32,6 @@ background: url("../public/img/bg-body-left2.png") top left no-repeat, url("../p
 .MuiButtonBase-root .MuiAccordionSummary-root .MuiAccordionSummary-gutters .css-1t24edw-MuiButtonBase-root-MuiAccordionSummary-root{
   padding-left: 0px !important;
 }
+/* .css-1t2rogw-MuiTypography-root {
+  display: none; /* Ẩn chữ Toolpad 
+} */
