@@ -71,9 +71,14 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+const clearCart = () => {
+  setCartItems([]); // Xóa hết sản phẩm trong giỏ hàng
+  localStorage.removeItem("cartItems"); // Nếu có lưu localStorage thì xóa luôn
+};
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addItem, deleteItem, countCartItems, getTotalPrice }}
+      value={{ cartItems, addItem, deleteItem, countCartItems, getTotalPrice,clearCart }}
     >
       {children}
     </CartContext.Provider>
