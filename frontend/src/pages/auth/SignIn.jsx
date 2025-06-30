@@ -14,6 +14,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation, Link as RouterLink } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { Snackbar, Alert } from "@mui/material";
 const API_URL = import.meta.env.VITE_API_URL + "/auth/login";
 
 const SignIn = () => {
@@ -22,7 +23,11 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "error", // 'error' | 'success' | 'info' | 'warning'
+  });
   const validate = () => {
     let valid = true;
 
@@ -42,19 +47,37 @@ const SignIn = () => {
   const from = location.state?.from?.pathname || "/home";
   const user = { email: email, password: password };
   const handleLogin = async () => {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
 
-    const res = await response.json();
-    const fullToken = res.token || "";
-    const jwt = fullToken.includes("|") ? fullToken.split("|")[1] : fullToken;
-    login(jwt);
-    navigate(from, { replace: true });
+      const res = await response.json();
+      if (!response.ok) {
+        setSnackbar({
+          open: true,
+          message: res.message || "Sai email hoặc mật khẩu!",
+          severity: "error",
+        });
+        return;
+      }
+
+      const fullToken = res.token || "";
+      const jwt = fullToken.includes("|") ? fullToken.split("|")[1] : fullToken;
+      login(jwt);
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error("Login error:", error);
+      setSnackbar({
+        open: true,
+        message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+        severity: "error",
+      });
+    }
   };
 
   return (
@@ -161,10 +184,24 @@ const SignIn = () => {
 
       <Box textAlign="center" mt={3} fontSize="0.875rem">
         Don't have an account?{" "}
-        <Link  component={RouterLink}  to={"/register"} underline="hover">
+        <Link component={RouterLink} to={"/register"} underline="hover">
           Sign up
         </Link>
       </Box>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity={snackbar.severity}
+          variant="filled"
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
