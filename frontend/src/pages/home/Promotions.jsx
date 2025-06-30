@@ -7,13 +7,13 @@ export default function Promotions() {
     <Link component={RouterLink} to={"/promotion-fast-sale"} style={{ textDecoration: "none" }}>
       <Box
         component="img"
-        src="https://cf.shopee.vn/file/sg-11134258-7ratj-ma7vj3kc2g1rfb_xxhdpi"
+        src="https://img.freepik.com/free-vector/flat-international-tea-day-horizontal-banner-template_23-2149383127.jpg"
         alt="Promotion Banner"
         sx={{
           width: "100%",
           display: "block",
           height: "12rem",
-          objectFit: "fill", // Giữ nguyên toàn bộ ảnh, không cắt viền
+          objectFit: "cover", // Giữ nguyên toàn bộ ảnh, không cắt viền
           transition: "transform 0.8s cubic-bezier(.25,.8,.25,1)",
           "&:hover": {
             transform: "scale(1.02)", // Phóng to nhẹ khi hover
