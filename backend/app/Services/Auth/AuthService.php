@@ -17,19 +17,28 @@ class AuthService
             'password' => 'required',
         ])->validate();
 
+        // Find the user by email
         $user = User::where('email', $validated['email'])->first();
-        if ($user && password_verify($validated['password'], $user->password)) {
-            // Generate a token for the user
-            $token = $user->createToken('auth_token')->plainTextToken;
-            // Return the token in the response
+
+        // Check if user exists and password is correct
+        if (!$user || !password_verify($validated['password'], $user->password)) {
             return [
-                'message' => 'Login successful',
-                'token' => $token,
-                'user' => $user,
+                'status' => 401, // Unauthorized
+                'token' => null,
+                'message' => 'Invalid credentials',
+                'user' => null
             ];
         }
+
+        // Generate a token for the user
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        // Return the token in the response
         return [
-            'message' => 'Invalid credentials',
+            'status' => 200, // OK
+            'message' => 'Login successful',
+            'token' => $token,
+            'user' => $user->makeHidden('password') // Hide sensitive data
         ];
     }
 
