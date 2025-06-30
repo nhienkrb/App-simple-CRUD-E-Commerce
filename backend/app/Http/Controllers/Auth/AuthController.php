@@ -21,7 +21,11 @@ class AuthController extends Controller
   public function login(Request $request)
   {
     $isLogin = $this->authService->login($request->all());
-    return response()->json($isLogin);
+    $statusCode  = $isLogin['status'] ?? 401;
+    if ($statusCode  === 401) {
+      $isLogin['message'] = 'Incorrect email or password';
+    }
+    return response()->json($isLogin, $statusCode);
   }
 
   public function logout(Request $request)
