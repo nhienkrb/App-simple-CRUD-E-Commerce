@@ -51,8 +51,8 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
-    public function getStatusAttribute($value)
-    {
-        return $value === 1 ? 'Pending' : 'Completed';
-    }
+    // public function getStatusAttribute($value)
+    // {
+    //     return $value === 1 ? 'Pending' : 'Completed';
+    // }
 }
