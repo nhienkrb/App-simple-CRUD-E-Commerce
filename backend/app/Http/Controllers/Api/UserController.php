@@ -23,7 +23,10 @@ public function __construct(UserService $userService)
     public function index()
     {
         $users = $this->userService->getAll();
-        return response()->json($users);
+          return response()->json([
+            'data' =>   $users ,
+            'message' => 'Users All',
+        ], 200);
     }
 
     /**
