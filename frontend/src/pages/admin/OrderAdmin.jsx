@@ -274,12 +274,12 @@ const OrderAdmin = () => {
           <TableHead>
             <TableRow>
               <TableCell />
-              <TableCell>Username</TableCell>
-              <TableCell>Order Code</TableCell>
-              <TableCell>Customer</TableCell>
-              <TableCell align="right">Order Date</TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Actions</TableCell>
+              <TableCell>Tên</TableCell>
+              <TableCell>Mã Order</TableCell>
+              <TableCell>Khách hàng</TableCell>
+              <TableCell align="right">Ngày đặt </TableCell>
+              <TableCell align="right">Trạng thái</TableCell>
+              <TableCell align="right">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
