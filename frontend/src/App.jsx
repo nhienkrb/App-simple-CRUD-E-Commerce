@@ -37,7 +37,10 @@ export default function App() {
             {/* Công khai */}
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
-            
+              <Route element={<ProtectedRoute />}>
+                <Route path="cart" element={<ShoppingCart />} />
+                <Route path="admin/*" element={<AdminRoutes />} />
+              </Route>
             {/* Layout chung: Navbar + Footer */}
             <Route path="/" element={<MainLayout />}>
               {/* Public routes */}
@@ -53,10 +56,7 @@ export default function App() {
               <Route path="*" element={<NoPage />} />
 
               {/* Protected routes */}
-              <Route element={<ProtectedRoute />}>
-                <Route path="cart" element={<ShoppingCart />} />
-                <Route path="admin" element={<AdminRoutes />} />
-              </Route>
+            
             </Route>
           </Routes>
         </CartProvider>
