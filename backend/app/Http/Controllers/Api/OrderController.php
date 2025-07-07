@@ -77,4 +77,11 @@ class OrderController extends Controller
 
         return response()->json(["data"=> $this->orderService->orderItem($request->all())]);
     }
+
+      public function userOrders(Request $request)
+    {
+        $userId = $request->user()->id; // Assuming authenticated user
+        $orders = $this->orderService->getUserOrders($userId);
+        return response()->json([$orders]);
+    }
 }

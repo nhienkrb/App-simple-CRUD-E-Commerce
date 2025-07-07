@@ -1,10 +1,21 @@
 <?php
+
 namespace App\Repositories;
+
 use App\Models\Order;
 
-class OrderRepository{
-    
-     public function getAll()
+class OrderRepository
+{
+
+    protected $model;
+
+    public function __construct(Order $model)
+    {
+        $this->model = $model;
+    }
+
+
+    public function getAll()
     {
         return Order::all();
     }
@@ -35,5 +46,22 @@ class OrderRepository{
             $order->delete();
         }
         return $order;
+    }
+
+  public function getAllOrdersWithDetails()
+    {
+        return $this->model->with([
+            'user:id,name',
+            'orderDetails.product:id,product_name,image,price'
+        ])->latest()->get();
+    }
+
+    public function getUserOrdersWithDetails($userId)
+    {
+        return $this->model->where('user_id', $userId)
+            ->with([
+                'orderDetails.product:id,product_name,image,price'
+            ])
+            ->get();
     }
 }

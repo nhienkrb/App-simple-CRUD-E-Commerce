@@ -27,7 +27,7 @@ class OrderService
 
 
     // Lấy tất cả đơn hàng
-    public function getAllOrders()
+    public function getAllTableOrders()
     {
         return $this->orderRepository->getAll();
     }
@@ -146,8 +146,8 @@ class OrderService
 
                 $order->orderDetails()->create([
                     'product_id' => $product->id,
-                    'price' => $product->price * $item['quantity'] ,
-                    'quantity' => $item['quantity'] ,
+                    'price' => $product->price * $item['quantity'],
+                    'quantity' => $item['quantity'],
                 ]);
             }
 
@@ -178,5 +178,58 @@ class OrderService
                 'message' => 'Order failed',
             ];
         }
+    }
+
+
+
+    public function getAllOrders()
+    {
+        $orders = $this->orderRepository->getAllOrdersWithDetails();
+        
+        return $orders->map(function ($order) {
+            return $this->formatOrderData($order);
+        });
+    }
+
+    public function getUserOrders($userId)
+    {
+        $orders = $this->orderRepository->getUserOrdersWithDetails($userId);
+
+        return $orders->map(function ($order) {
+            return $this->formatOrderData($order);
+        });
+    }
+
+  protected function formatOrderData($order)
+    {
+        return [
+            'username' => $order->user->name,
+            'imageUrl' => $order->user->image ?? null,
+            'orderDate' => $order->created_at->toDateString(),
+            'status' => $this->getStatusText($order->status),
+            'price' => $order->orderDetails->sum(function ($detail) {
+                return $detail->price * $detail->quantity;
+            }),
+            'orderCode' => 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT),
+            'history' => $order->orderDetails->map(function ($detail) {
+                return [
+                    'date' => $detail->created_at->toDateString(),
+                    'customerId' => $detail->order->user_id,
+                    'amount' => $detail->quantity,
+                    'productName' => $detail->product->product_name,
+                    'productImage' => $detail->product->image
+                ];
+            })
+        ];
+    }
+
+    protected function getStatusText($status)
+    {
+        $statuses = [
+            0 => 'Pending',
+            1 => 'Completed',
+        ];
+
+        return $statuses[$status] ?? 'Unknown';
     }
 }

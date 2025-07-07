@@ -67,7 +67,11 @@ Route::middleware('auth:sanctum')
         Route::post('order-items', 'orderItems')->name('order.orderItems');
     });
 
-
+Route::prefix('v1/orders/')->group(function () {
+        Route::get('order-manager', [OrderController::class, 'index']);
+    Route::get('orders/{id}', [OrderController::class, 'show']);
+    Route::get('user/orders', [OrderController::class, 'userOrders']);
+});
 // API resources with versioning
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
