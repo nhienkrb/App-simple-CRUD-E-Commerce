@@ -36,18 +36,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'product_name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'quantity' => 'required|integer',
-        ]);
-        // Create a new product instance
-        $product =  Product::create($validateData);
-        return response()->json([
-            'message' => 'Product created successfully',
-            'data' => $product,
-        ], 201);
+        // Validate the request`
+       return $this->productService->create($request->all());
     }
 
     /**
