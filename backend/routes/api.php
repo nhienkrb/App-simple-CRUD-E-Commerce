@@ -21,12 +21,6 @@ use App\Models\Product;
 | File này được load tự động bởi RouteServiceProvider.
 */
 
-Route::get('/user', function () {
-    return response()->json([
-        'name' => 'John Doe',
-        'email' => 'nhienn@gmail.com',
-    ], 200);
-});
 
 // Authentication routes
 Route::prefix('v1/auth')->group(function () {
