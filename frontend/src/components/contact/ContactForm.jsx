@@ -70,7 +70,7 @@ const ContactForm = () => {
       />
 
       <Typography variant="body1" fontWeight="bold">
-        Nội dung
+        Nội dung Gửi
       </Typography>
       <TextField
         name="message"
