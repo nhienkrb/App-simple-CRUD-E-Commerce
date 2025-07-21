@@ -44,7 +44,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/home";
+  const from = location.state?.from?.pathname || "/trang-chu";
   const user = { email: email, password: password };
   const handleLogin = async () => {
     try {
@@ -54,6 +54,7 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
+        credentials: "include"
       });
 
       const res = await response.json();
@@ -71,7 +72,7 @@ const SignIn = () => {
       login(jwt);
       navigate(from, { replace: true });
     } catch (error) {
-      console.error("Login error:", error);
+      // console.error("Login error:", error);
       setSnackbar({
         open: true,
         message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
@@ -91,7 +92,7 @@ const SignIn = () => {
       bgcolor="#fff"
     >
       <Typography variant="h2" fontWeight={700} mb={2}>
-        Sign in
+        Login
       </Typography>
 
       <TextField
@@ -141,7 +142,7 @@ const SignIn = () => {
           boxShadow: "0 2px 6px rgb(20 22 33 / 50%)",
         }}
       >
-        Sign in
+        Login
       </Button>
 
       <Box textAlign="center" mt={2}>
@@ -170,7 +171,7 @@ const SignIn = () => {
         startIcon={<GoogleIcon />}
         sx={{ mb: 1, textTransform: "none" }}
       >
-        Sign in with Google
+        Login with Google
       </Button>
 
       <Button
@@ -179,7 +180,7 @@ const SignIn = () => {
         startIcon={<FacebookIcon />}
         sx={{ textTransform: "none" }}
       >
-        Sign in with Facebook
+        Login with Facebook
       </Button>
 
       <Box textAlign="center" mt={3} fontSize="0.875rem">

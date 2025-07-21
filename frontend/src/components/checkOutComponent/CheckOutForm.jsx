@@ -16,10 +16,16 @@ import StoreIcon from "@mui/icons-material/Store";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+const API_URL = `${import.meta.env.VITE_API_URL}/orders/order-items`;
 
 export default function CheckoutForm() {
   const [paymentMethod, setPaymentMethod] = React.useState("store");
-  const {cartItems,clearCart} = useCart();
+  const { cartItems, clearCart } = useCart();
+  const {  isAuthenticated, token } = useAuth();
+  const navigate = useNavigate();
+
   // Dữ liệu form
   const [form, setForm] = React.useState({
     name: "",
@@ -37,18 +43,27 @@ export default function CheckoutForm() {
   };
 
   const handleOrder = async () => {
+    if (!isAuthenticated(token)) {
+      alert("Bạn cần đăng nhập để đặt hàng.");
+      navigate("/login");
+    }
+
     const payload = {
       address: `${form.address}, ${form.city}, ${form.apartment}`,
       loyalty_usage: "use",
-      items: cartItems.map((item)=>({product_id: item.id, quantity: item.quantity})),
+      items: cartItems.map((item) => ({
+        product_id: item.id,
+        quantity: item.quantity,
+      })),
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/orders/order-items", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization" : "Bearer jsFc1ymgBbuk8iX89hTfMz2WOuVUSnAMWShs4DQv67e5264c"
+          Authorization:
+            `Bearer ${token}`
         },
         body: JSON.stringify(payload),
       });
@@ -74,7 +89,7 @@ export default function CheckoutForm() {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid  size={{ xs: 12, sm: 6 }}>
           <TextField
             label="Tên"
             required
@@ -83,7 +98,7 @@ export default function CheckoutForm() {
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid  ize={{ xs: 12, sm: 6 }}>
           <TextField
             label="Địa chỉ"
             required
@@ -92,7 +107,7 @@ export default function CheckoutForm() {
             onChange={(e) => setForm({ ...form, address: e.target.value })}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid  ize={{ xs: 12, sm: 6 }}>
           <TextField
             label="Tỉnh / Thành phố"
             required
@@ -101,7 +116,7 @@ export default function CheckoutForm() {
             onChange={(e) => setForm({ ...form, city: e.target.value })}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid  ize={{ xs: 12, sm: 6 }}>
           <TextField
             label="Số điện thoại"
             required
@@ -110,7 +125,7 @@ export default function CheckoutForm() {
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid  ize={{ xs: 12, sm: 6 }}>
           <TextField
             label="Địa chỉ email"
             required
@@ -119,7 +134,7 @@ export default function CheckoutForm() {
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid  ize={{ xs: 12, sm: 6 }}>
           <TextField
             label="Apartment, suite, unit... (optional)"
             fullWidth
@@ -131,12 +146,13 @@ export default function CheckoutForm() {
 
       <Box sx={{ my: 4 }}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
+          <Grid size={{ xs: 12, sm: 4 }}>
             <Card
               variant="outlined"
               onClick={() => handlePaymentChange("store")}
               sx={{
-                borderColor: paymentMethod === "store" ? "primary.main" : "grey.300",
+                borderColor:
+                  paymentMethod === "store" ? "primary.main" : "grey.300",
                 borderWidth: 2,
               }}
             >
@@ -151,12 +167,13 @@ export default function CheckoutForm() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid  size={{ xs: 12, sm: 4 }}>
             <Card
               variant="outlined"
               onClick={() => handlePaymentChange("cod")}
               sx={{
-                borderColor: paymentMethod === "cod" ? "primary.main" : "grey.300",
+                borderColor:
+                  paymentMethod === "cod" ? "primary.main" : "grey.300",
                 borderWidth: 2,
               }}
             >
@@ -171,12 +188,13 @@ export default function CheckoutForm() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid  size={{ xs: 12, sm: 4 }}>
             <Card
               variant="outlined"
               onClick={() => handlePaymentChange("bank")}
               sx={{
-                borderColor: paymentMethod === "bank" ? "primary.main" : "grey.300",
+                borderColor:
+                  paymentMethod === "bank" ? "primary.main" : "grey.300",
                 borderWidth: 2,
               }}
             >
@@ -194,7 +212,9 @@ export default function CheckoutForm() {
       </Box>
 
       <Box sx={{ my: 2 }}>
-        <Typography>📍 123 Tô Diện, Phường Khương Trung, Quận 12, TP HCM</Typography>
+        <Typography>
+          📍 123 Tô Diện, Phường Khương Trung, Quận 12, TP HCM
+        </Typography>
         <Typography>📍 Xóm 8 - Nam Vân - TP Nam Định - Nam Định</Typography>
       </Box>
 
