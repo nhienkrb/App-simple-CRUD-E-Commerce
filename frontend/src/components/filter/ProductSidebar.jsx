@@ -66,7 +66,7 @@ export default function ProductSidebar() {
               >
                 <Typography
                   component={RouteLink}
-                  to={`/category/${itemCategory.slug}`}
+                  to={`/the-loai/${itemCategory.slug}`}
                   fontWeight={500}
                   variant="h4"
                   sx={{ textDecoration: "none", color:"white" }}
