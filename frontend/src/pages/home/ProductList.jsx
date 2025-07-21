@@ -3,8 +3,7 @@ import React from "react";
 import useFetchList from "../../hooksCustom/useFetchList";
 import ProductCard from "../../components/ProductCard";
 import LineCut from "../../components/LineCut";
-
-const API_URL = "http://localhost:8000/api/v1/products";
+const API_URL = `${import.meta.env.VITE_API_URL}/products`;
 export default function ProductList() {
   const products = useFetchList(API_URL);
 
