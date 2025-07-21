@@ -104,7 +104,7 @@ export default function ProductCard({ product }) {
                   overflow: "hidden",
                    textOverflow: "ellipsis", 
                   height: "3rem", // 👈 đảm bảo mọi card cao bằng nhau 
-                  }} color="inherit" variant="body1"  fontWeight="600" to={`/product/${product.slug}`}>
+                  }} color="inherit" variant="body1"  fontWeight="600" to={`/san-pham-chi-tiet/${product.slug}`}>
             {product.product_name}
           </Typography>
           <Typography variant="h6" color="error" fontWeight={700}>
