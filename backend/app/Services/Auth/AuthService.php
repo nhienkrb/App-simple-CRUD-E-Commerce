@@ -13,13 +13,12 @@ class AuthService
     {
         // Validate the request data
         $validated = validator($credentials, [
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required',
         ])->validate();
 
         // Find the user by email
         $user = User::where('email', $validated['email'])->first();
-
         // Check if user exists and password is correct
         if (!$user || !password_verify($validated['password'], $user->password)) {
             return [
