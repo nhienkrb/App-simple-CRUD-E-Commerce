@@ -10,7 +10,7 @@ export default function DrawerNavbar({ page }) {
         <Drawer open={openDrawer} anchor="left" onClose={()=>setOpenDrawer(false)} >
           <List>
             {page.map((item, index) => (
-              <ListItemButton key={index}  component={RouterLink} to={page.path} onClick={()=>setOpenDrawer(false)}>
+              <ListItemButton key={index}  component={RouterLink} to={item.path} onClick={()=>setOpenDrawer(false)}>
                 <ListItemIcon >
                   <ListItemText  >{item.label}</ListItemText>
                 </ListItemIcon>
@@ -18,7 +18,7 @@ export default function DrawerNavbar({ page }) {
             ))}
           </List>
         </Drawer>
-        <IconButton onClick={()=> {setOpenDrawer(!openDrawer)}} sx={{color:"white", marginLeft: "auto"}}>
+        <IconButton onClick={()=> {setOpenDrawer(!openDrawer)}} sx={{color:"white", marginRight: "auto"}}>
             <MenuIcon></MenuIcon>
         </IconButton>
       </>
