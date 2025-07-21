@@ -13,22 +13,22 @@ const ContactInfo = () => {
       <ul style={{ listStyle: 'disc', paddingLeft: '20px' }}>
         <li>
           <Typography component="span" sx={{ fontWeight: 'bold', color: 'red' }}>
-            CÔNG TY TNHH ĐẦU TƯ VÀ THƯƠNG MẠI BẠCH LIÊN
+            CÔNG TY TNHH ĐẦU TƯ 
           </Typography>
         </li>
         <li>MST: 0110650850</li>
         <li>
-          <LocationOn fontSize="small" /> Địa chỉ: 29/40 Tô Vĩnh Diện, Khương Trung, Thanh Xuân, Hà Nội
+          <LocationOn fontSize="small" /> Địa chỉ: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         </li>
         <li>
-          <Phone fontSize="small" /> Điện thoại: <b>093 444 6663</b> – Zalo: <b style={{ color: 'red' }}>093 444 6663</b>
+          <Phone fontSize="small" /> Điện thoại: <b>xxxxxxxxx</b> – Zalo: <b style={{ color: 'red' }}>0832700969</b>
         </li>
         <li>
-          <Email fontSize="small" /> Mail: <Link href="mailto:info@bachlien.vn">info@bachlien.vn</Link>
+          <Email fontSize="small" /> Mail: <Link href="mailto:nhiennkrb@gmail.com">nhiennkrb@gmail.com</Link>
         </li>
         <li>
-          <Language fontSize="small" /> Website: <Link href="https://bachlien.vn" target="_blank" rel="noopener" color="error">
-            https://bachlien.vn
+          <Language fontSize="small" /> Website: <Link href="https://laptrinhwebtea.in" target="_blank" rel="noopener" color="error">
+            https://frontend.laptrinhwebtea.in
           </Link>
         </li>
       </ul>
