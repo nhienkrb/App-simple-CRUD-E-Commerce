@@ -15,12 +15,14 @@ import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import FloatingSocialButtons from "./components/FloatingSocialButtons";
 
 function MainLayout() {
   return (
     <>
       <Navbar />
       <Outlet />
+      <FloatingSocialButtons />
       <Footer />
     </>
   );

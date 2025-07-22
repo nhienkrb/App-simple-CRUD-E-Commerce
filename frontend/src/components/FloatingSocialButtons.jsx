@@ -41,7 +41,7 @@ const FloatingSocialButtons = () => {
           boxShadow: '0 0 0 10px rgba(0, 132, 255, 0.2)',
           '&:hover': { background: '#006edc' },
         }}
-        href="https://zalo.me/0934446663"
+        href="https://zalo.me/0832700969"
         target="_blank"
       >
         <ChatIcon />
@@ -56,7 +56,7 @@ const FloatingSocialButtons = () => {
           boxShadow: '0 0 0 10px rgba(164, 22, 26, 0.2)',
           '&:hover': { background: '#870d11' },
         }}
-        href="tel:0934446663"
+        href="tel:0832700969"
       >
         <PhoneIcon />
       </IconButton>
