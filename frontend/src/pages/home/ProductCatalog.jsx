@@ -11,7 +11,7 @@ export default function ProductCatalog() {
         mb: 4,
       }}
     >
-      <Grid sx={{ sm: 6, md: 4 }} container spacing={8}>
+      <Grid sx={{ xs: 6, sm: 4, md: 4 }} container spacing={8}>
         {categories
           .filter((cat) => cat.category_name.length < 18) // lọc tên ngắn
           .slice(0, 7) // lấy 6 cái đầu
