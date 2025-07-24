@@ -30,6 +30,7 @@ class CategoryService
             $validator = Validator::make($data, [
                 'category_name' => 'required|string|max:255',
                 'slug' => 'required|string|max:255',
+                'category_image' => 'required|file|image|max:10240', // thêm validate ảnh
             ]);
             if ($validator->fails()) {
                 return [
@@ -40,13 +41,18 @@ class CategoryService
             $validated = $validator->validated();
             DB::beginTransaction();
             $cloudinary = new Cloudinary();
-            $cloudinary->uploadApi()->upload(
+            $upload =   $cloudinary->uploadApi()->upload(
                 $validated['category_image']->getRealPath(),
                 [
                     'folder' => 'categories',
+                    'public_id' => $validated['slug'], // sử dụng slug làm public_id
                 ]
             );
-            $category =  $this->categoryRepository->create($validated);
+            $category = $this->categoryRepository->create([
+                'category_name' => $validated['category_name'],
+                'slug' => $validated['slug'],
+                'category_image' => $upload['secure_url'],
+            ]);
             DB::commit();
             return [
                 'status' => true,
