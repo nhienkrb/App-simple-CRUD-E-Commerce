@@ -17,6 +17,7 @@ class Product extends Model
         'price' => 'float',
         'quantity' => 'integer',
     ];
+    protected $with=['orderProductImages', 'variants', 'inforProduct'];
 
     protected static function booted(){
         parent::booted();
@@ -43,4 +44,8 @@ class Product extends Model
 {
     return $this->hasOne(InforProduct::class, 'product_id');
 }
+    public function orderProductImages()
+    {
+        return $this->hasMany(OrderProductImage::class, 'product_id');
+    }
 }
