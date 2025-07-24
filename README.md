@@ -1,24 +1,32 @@
 # App-simple-CRUD-E-Commerce
 
 # Install dependencies
-cd frontend
-cd ../admin
-npm install
+
+<p>cd frontend</p>
+<p>cd ../admin</p>
+<p>npm install</p>
+
 
 # Run development server
-npm run dev
+
+<p>npm run dev</p>
 
 
-cd ../backend
 # Install PHP dependencies
-composer install
+<p>cd ../backend</p>
+<p>composer install</p>
 
 # Create a copy of the .env file
-cp .env.example .env
+
+<p>cp .env.example .env</p>
 
 # Generate app encryption key
-php artisan key:generate
+
+<p>php artisan key:generate</p>
 
 # Nếu có dùng database:
-php artisan migrate       # Chạy các migration
-php artisan serve         # Chạy server backend
+
+<p>php artisan migrate</p>
+<p>php artisan serve </p>
+
+
