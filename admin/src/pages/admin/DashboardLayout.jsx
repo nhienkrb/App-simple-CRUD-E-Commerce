@@ -8,15 +8,13 @@ import LayersIcon from "@mui/icons-material/Layers";
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { PageContainer } from "@toolpad/core/PageContainer";
-import Grid from "@mui/material/Grid";
-import { Box, Typography } from "@mui/material";
 import DashboardCards from "../../components/adminComponent/DashboardCards";
 import OrderAdmin from "./OrderAdmin";
-import { Person } from "@mui/icons-material";
 import UserList from "./UserList";
-import FilterComponentAdmin from "../../components/filter/FilterOrderAdmin";
+import CategoriesAdmin from "../category/CategoriesAdmin";
 import ProductAdmin from "./ProductAdmin";
-
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import { Person } from "@mui/icons-material";
 const NAVIGATION = [
   {
     kind: "header",
@@ -62,10 +60,16 @@ const NAVIGATION = [
     icon: <Person />,
   },
 
-    {
+  {
     segment: "products",
     title: "Products",
     icon: <LayersIcon />,
+  },
+
+  {
+    segment: "categories",
+    title: "Categories",
+    icon: <ListAltIcon />,
   },
 ];
 
@@ -104,29 +108,36 @@ function RenderPage({ pathname }) {
     case "/dashboard":
       return <DashboardCards />;
     case "/orders":
-      return (<> <OrderAdmin /></>);
+      return (
+        <>
+          {" "}
+          <OrderAdmin />
+        </>
+      );
     case "/users":
-      return <UserList/>
-      case "/products":
-      return <ProductAdmin/>
+      return <UserList />;
+    case "/products":
+      return <ProductAdmin />;
+    case "/categories":
+      return <CategoriesAdmin />;
     default:
       return <h2>404 - Page Not Found</h2>;
   }
 }
-const adminPaths = ["/dashboard", "/orders", "/reports","/users","/products"];
+const adminPaths = ["/dashboard", "/orders", "/reports", "/users", "/products","/categories"];
 export default function DashboardLayoutBs(props) {
   const { window } = props;
 
   const router = useDemoRouter("/dashboard");
-React.useEffect(() => {
-if (adminPaths.some((path) => router.pathname.startsWith(path))) {
-    document.body.style.background = "#f7f7f7"; 
-    document.documentElement.style.background = "#f7f7f7";
-  } else {
-    document.body.style.background = '';
-    document.documentElement.style.background = '';
-  }
-}, [router.pathname]);
+  React.useEffect(() => {
+    if (adminPaths.some((path) => router.pathname.startsWith(path))) {
+      document.body.style.background = "#f7f7f7";
+      document.documentElement.style.background = "#f7f7f7";
+    } else {
+      document.body.style.background = "";
+      document.documentElement.style.background = "";
+    }
+  }, [router.pathname]);
 
   // Remove this const when copying and pasting into your project.
   const demoWindow = window ? window() : undefined;

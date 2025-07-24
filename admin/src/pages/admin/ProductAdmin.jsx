@@ -25,7 +25,7 @@ const columns = [
   { id: "tag_name", label: "Loại trà", minWidth: 100 },
   { id: "image", label: "Ảnh", minWidth: 120, align: "center" },
 ];
-
+const API_URL = `${import.meta.env.VITE_API_URL}/products` || "https://laptrinhwebtea.click/api/v1/products";
 export default function ProductAdmin() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -33,7 +33,7 @@ export default function ProductAdmin() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    fetch("https://laptrinhwebtea.click/api/v1/products")
+    fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
         // Nếu API trả về { data: [...] }

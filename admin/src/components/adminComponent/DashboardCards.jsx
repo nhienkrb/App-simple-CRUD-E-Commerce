@@ -7,8 +7,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 const cardData = [
   {
     icon: <PersonIcon sx={{ fontSize: 40, color: "#ff9800" }} />,
-    title: "Number",
-    value: "150GB",
+    title: "Users",
+    value: "1000",
     subtitle: "Update Now",
     link: "/dashboard",
   },
