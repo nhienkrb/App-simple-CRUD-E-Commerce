@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Chip,
@@ -18,14 +18,14 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
-  KeyboardArrowUp as KeyboardArrowUpIcon
+  KeyboardArrowUp as KeyboardArrowUpIcon,
 } from "@mui/icons-material";
 import PropTypes from "prop-types";
-
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 const OrderRow = ({ row }) => {
   const [open, setOpen] = useState(false);
 
@@ -46,18 +46,18 @@ const OrderRow = ({ row }) => {
         </TableCell>
         <TableCell>{row.orderCode}</TableCell>
         <TableCell>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar 
-              alt={row.username} 
-              src={row.imageUrl} 
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Avatar
+              alt={row.username}
+              src={row.imageUrl}
               sx={{ width: 56, height: 56, mr: 2 }}
             />
-            <Typography 
-              sx={{ 
+            <Typography
+              sx={{
                 maxWidth: 200,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
               }}
             >
               {row.username}
@@ -66,22 +66,26 @@ const OrderRow = ({ row }) => {
         </TableCell>
         <TableCell align="right">{row.orderDate}</TableCell>
         <TableCell align="right">
-          <Chip 
-            label={row.status} 
+          <Chip
+            label={row.status}
             color={
-              row.status === "Pending" ? "warning" : 
-              row.status === "Completed" ? "success" : 
-              "default"
-            } 
+              row.status === "Pending"
+                ? "warning"
+                : row.status === "Completed"
+                  ? "success"
+                  : "default"
+            }
           />
         </TableCell>
         <TableCell align="right">
           <IconButton aria-label="actions">
             {/* Action buttons can be added here */}
+
+            {row.status === "Pending" ? <CheckBoxIcon /> : <></>}
           </IconButton>
         </TableCell>
       </TableRow>
-      
+
       <TableRow>
         <TableCell sx={{ p: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -106,19 +110,24 @@ const OrderRow = ({ row }) => {
                       <TableCell>{historyRow.date}</TableCell>
                       <TableCell>{historyRow.customerId}</TableCell>
                       <TableCell>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar 
-                            alt={historyRow.productName} 
-                            src={historyRow.productImage} 
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                          <Avatar
+                            alt={historyRow.productName}
+                            src={historyRow.productImage}
                             sx={{ width: 40, height: 40, mr: 1 }}
                           />
                           <Typography>{historyRow.productName}</Typography>
                         </Box>
                       </TableCell>
-                      <TableCell align="right">${historyRow.price?.toFixed(2)}</TableCell>
+                      <TableCell align="right">
+                        ${historyRow.price?.toFixed(2)}
+                      </TableCell>
                       <TableCell align="right">{historyRow.amount}</TableCell>
                       <TableCell align="right">
-                        ${((historyRow.amount || 0) * (historyRow.price || 0)).toFixed(2)}
+                        $
+                        {(
+                          (historyRow.amount || 0) * (historyRow.price || 0)
+                        ).toFixed(2)}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -188,34 +197,35 @@ FilterComponent.propTypes = {
   status: PropTypes.string.isRequired,
   onStatusChange: PropTypes.func.isRequired,
 };
+const API_URL = `${import.meta.env.VITE_API_URL}/orders/order-manager`;
 
 const OrderAdmin = () => {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const [statusFilter, setStatusFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/orders/order-manager');
-        
+        const response = await fetch(API_URL);
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
-        
-        const formattedData = Array.isArray(data) ? 
-          data.map(order => ({
-            ...order,
-            history: order.history || [],
-            price: order.price || 0,
-            status: order.status || 'Pending'
-          })) : 
-          [];
-        
+
+        const formattedData = Array.isArray(data)
+          ? data.map((order) => ({
+              ...order,
+              history: order.history || [],
+              price: order.price || 0,
+              status: order.status || "Pending",
+            }))
+          : [];
+
         setOrders(formattedData);
         setFilteredOrders(formattedData);
       } catch (err) {
@@ -231,8 +241,8 @@ const OrderAdmin = () => {
 
   useEffect(() => {
     if (statusFilter) {
-      const filtered = orders.filter(order => 
-        order.status.toLowerCase() === statusFilter.toLowerCase()
+      const filtered = orders.filter(
+        (order) => order.status.toLowerCase() === statusFilter.toLowerCase()
       );
       setFilteredOrders(filtered);
     } else {
@@ -246,7 +256,7 @@ const OrderAdmin = () => {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", p: 4 }}>
         <CircularProgress />
       </Box>
     );
@@ -255,20 +265,18 @@ const OrderAdmin = () => {
   if (error) {
     return (
       <Box sx={{ p: 2 }}>
-        <Alert severity="error">
-          Error loading orders: {error}
-        </Alert>
+        <Alert severity="error">Error loading orders: {error}</Alert>
       </Box>
     );
   }
 
   return (
     <Box sx={{ p: 2 }}>
-      <FilterComponent 
-        status={statusFilter} 
-        onStatusChange={handleStatusChange} 
+      <FilterComponent
+        status={statusFilter}
+        onStatusChange={handleStatusChange}
       />
-      
+
       <TableContainer component={Paper}>
         <Table aria-label="orders table">
           <TableHead>
@@ -284,7 +292,7 @@ const OrderAdmin = () => {
           </TableHead>
           <TableBody>
             {filteredOrders.length > 0 ? (
-              filteredOrders.map(order => (
+              filteredOrders.map((order) => (
                 <OrderRow key={order.orderCode} row={order} />
               ))
             ) : (

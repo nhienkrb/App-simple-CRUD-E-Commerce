@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 
 const useFetchList = (path, query = {}, config = {}) => {
   const [data, setData] = useState([]);
+  const [refetchIndex, setRefetchIndex] = useState(0);
+
+  // Đặt refetch ở đây trước khi return
+  const refetch = () => {
+    setRefetchIndex((prev) => prev + 1);
+  };
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -15,14 +21,14 @@ const useFetchList = (path, query = {}, config = {}) => {
         setData(res.data || []);
       } catch (error) {
         console.error("Fetch error:", error);
-        setData([]); // fallback khi lỗi
+        setData([]);
       }
     };
 
     fetchAPI();
-  }, [path, JSON.stringify(query), JSON.stringify(config)]);
+  }, [path, JSON.stringify(query), JSON.stringify(config), refetchIndex]);
 
-  return data; // ✅ chỉ return mảng data
+  return { data, refetch }; 
 };
 
 export default useFetchList;
