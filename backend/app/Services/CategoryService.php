@@ -4,6 +4,10 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
+use Cloudinary\Cloudinary;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryService
 {
@@ -22,7 +26,42 @@ class CategoryService
 
     public function create(array $data)
     {
-        return $this->categoryRepository->create($data);
+        try {
+            $validator = Validator::make($data, [
+                'category_name' => 'required|string|max:255',
+                'slug' => 'required|string|max:255',
+            ]);
+            if ($validator->fails()) {
+                return [
+                    'status' => false,
+                    'errors' => $validator->errors()
+                ];
+            }
+            $validated = $validator->validated();
+            DB::beginTransaction();
+            $cloudinary = new Cloudinary();
+            $cloudinary->uploadApi()->upload(
+                $validated['category_image']->getRealPath(),
+                [
+                    'folder' => 'categories',
+                ]
+            );
+            $category =  $this->categoryRepository->create($validated);
+            DB::commit();
+            return [
+                'status' => true,
+                'message' => 'Tạo danh mục thành công',
+                'category_id' => $category->id
+            ];
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error('Tạo sản danh mục bại: ' . $th->getMessage());
+            return [
+                'status' => false,
+                'message' => 'Tạo danh mục thất bại',
+                'error' => $th->getMessage(),
+            ];
+        }
     }
 
     public function find(int $id)
@@ -46,30 +85,29 @@ class CategoryService
         return $this->categoryRepository->getAllCategories_Name();
     }
 
-   // App/Services/CategoryService.php
+    // App/Services/CategoryService.php
 
-public function getCategoryName_ProductTagName()
-{
-    $data = $this->categoryRepository->getCategoryName_ProductTagName();
+    public function getCategoryName_ProductTagName()
+    {
+        $data = $this->categoryRepository->getCategoryName_ProductTagName();
 
-    // Group theo category_id (tránh group theo tên trùng lặp)
-    $grouped = $data->groupBy('category_id');
-    // Biến kết quả về dạng array rõ ràng
-    $result = [];
+        // Group theo category_id (tránh group theo tên trùng lặp)
+        $grouped = $data->groupBy('category_id');
+        // Biến kết quả về dạng array rõ ràng
+        $result = [];
 
-    foreach ($grouped as $category_id => $items) {
-        $first = $items->first(); // lấy thông tin category
+        foreach ($grouped as $category_id => $items) {
+            $first = $items->first(); // lấy thông tin category
 
-        $result[] = [
-            'category_id' => $category_id,
-            'category_name' => $first->category_name,
-            'slug' => $first->slug,
-            'tag_name' => $items->pluck('tag_name')->unique()->values(), // loại trùng tag
-            'tag' => $items->pluck('tag')->unique()->values(), // nếu cần
-        ];
+            $result[] = [
+                'category_id' => $category_id,
+                'category_name' => $first->category_name,
+                'slug' => $first->slug,
+                'tag_name' => $items->pluck('tag_name')->unique()->values(), // loại trùng tag
+                'tag' => $items->pluck('tag')->unique()->values(), // nếu cần
+            ];
+        }
+
+        return $result;
     }
-
-    return $result;
-}
-
 }

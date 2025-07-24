@@ -35,19 +35,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // Validate the request data
-        $validatedData = $request->validate([
-            'category_name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-        ]);
+   
 
         // Create a new category
-        $category = $this->categoryService->create($validatedData);
+        $category = $this->categoryService->create($request->all());
 
         // Return a response
-        return response()->json([
-            'message' => 'Category created successfully',
-            'data' => $category,
-        ], 201);
+        return response()->json([$category], 201);
     }
 
     /**
