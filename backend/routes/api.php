@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ChatBotController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\UserController;
@@ -66,6 +67,8 @@ Route::prefix('v1/orders/')->group(function () {
     Route::get('orders/{id}', [OrderController::class, 'show']);
     Route::get('user/orders', [OrderController::class, 'userOrders']);
 });
+
+Route::post('/chatbot', [ChatBotController::class, 'chat']);
 // API resources with versioning
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
