@@ -9,12 +9,11 @@ const FloatingSocialButtons = () => {
     <Box
       sx={{
         position: 'fixed',     // bám cố định vào màn hình
-        bottom: '7%',            // cách đỉnh trang 7%
-        right: 10,              // cách mép trái 10px
+        bottom: 90,
+        right: 20,              // cách mép trái 10px
         display: 'flex',
         flexDirection: 'column',
         gap: 3,
-        zIndex: 1000,          // nổi trên các thành phần khác
       }}
     >
       {/* Facebook */}
@@ -44,11 +43,11 @@ const FloatingSocialButtons = () => {
         href="https://zalo.me/0832700969"
         target="_blank"
       >
-        <ChatIcon />
+        <PhoneIcon />
       </IconButton>
 
       {/* Phone */}
-      <IconButton
+      {/* <IconButton
         size="large"
         sx={{
           background: '#a4161a',
@@ -56,10 +55,9 @@ const FloatingSocialButtons = () => {
           boxShadow: '0 0 0 10px rgba(164, 22, 26, 0.2)',
           '&:hover': { background: '#870d11' },
         }}
-        href="tel:0832700969"
       >
-        <PhoneIcon />
-      </IconButton>
+        <ChatIcon />
+      </IconButton> */}
     </Box>
   );
 };
