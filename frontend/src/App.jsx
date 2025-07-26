@@ -16,6 +16,7 @@ import SignUp from "./pages/auth/SignUp";
 import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import FloatingSocialButtons from "./components/FloatingSocialButtons";
+import ChatBotSupport from "./components/ChatBotSupport";
 
 function MainLayout() {
   return (
@@ -23,6 +24,8 @@ function MainLayout() {
       <Navbar />
       <Outlet />
       <FloatingSocialButtons />
+            <ChatBotSupport />
+
       <Footer />
     </>
   );
