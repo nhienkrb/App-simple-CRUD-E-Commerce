@@ -35,7 +35,7 @@ Chỉ trả lời tên sản phẩm + giá. Không nói linh tinh.
 EOT;
 
         $response = Http::withHeaders([
-            'X-goog-api-key' =>env("GEMINI_API_KEY","AIzaSyDa4DBH6zCmEKX1HYzRp5QjTvBcOkAsepw"),
+            'X-goog-api-key' =>env("GEMINI_API_KEY"),
             'Content-Type' => 'application/json',
         ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', [
             'contents' => [
