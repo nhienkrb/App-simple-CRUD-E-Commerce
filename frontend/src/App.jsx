@@ -17,6 +17,7 @@ import AuthProvider from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import FloatingSocialButtons from "./components/FloatingSocialButtons";
 import ChatBotSupport from "./components/ChatBotSupport";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function MainLayout() {
   return (
@@ -40,7 +41,8 @@ export default function App() {
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route element={<ProtectedRoute />}>
-              <Route path="cart" element={<ShoppingCart />} />
+              <Route path="cart" element={<ShoppingCart />} /> 
+                 <Route path="payment-success" element={<PaymentSuccess />} /> 
             </Route>
             {/* Layout chung: Navbar + Footer */}
             <Route path="/" element={<MainLayout />}>

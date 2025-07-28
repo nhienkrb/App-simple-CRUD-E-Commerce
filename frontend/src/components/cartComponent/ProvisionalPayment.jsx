@@ -55,7 +55,7 @@ export default function ProvisionalPayment({setShowCheckout}) {
         >
           <Button
             component={RouterLink}
-            to="/products"
+            to="/san-pham"
             variant="contained"
             sx={{
               boxShadow: 0,
