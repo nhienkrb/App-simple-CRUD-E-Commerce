@@ -9,10 +9,13 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ChatBotController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\PaymentMoMoController;
 use App\Http\Controllers\Api\UserController;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +72,20 @@ Route::prefix('v1/orders/')->group(function () {
 });
 
 Route::post('/chatbot', [ChatBotController::class, 'chat']);
+// routes/api.php
+Route::post('/v1/payment/vnpay', [PaymentController::class, 'createPayment']);
+Route::post('/v1/payment/momo', [PaymentMoMoController::class, 'createPayment']);
+Route::middleware('auth:sanctum')->get('/v1/payment/order-temp', function (Request $request) {
+    $key = $request->query('key');
+    $payload = cache()->get("order_payload_$key");
+    Log::info($payload);
+    if (!$payload) {
+        return response()->json(['message' => 'Dữ liệu hết hạn hoặc không hợp lệ'], 404);
+    }
+
+    return response()->json(['payload' => $payload]);
+});
+
 // API resources with versioning
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
