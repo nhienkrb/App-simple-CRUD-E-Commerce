@@ -51,7 +51,7 @@ export default function Navbar() {
   const handleLogout = () => {
     handleClose();
     logout();
-    navigate("/login");
+    navigate("/trang-chu");
   };
 
     const handleLogin = () => {
