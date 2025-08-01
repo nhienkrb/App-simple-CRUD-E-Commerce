@@ -135,7 +135,7 @@ class ProductController extends Controller
 
     public function filterProduct(Request $request)
     {
-        $filters = $request->only(['page', 'limit', 'sort']);
+        $filters = $request->only(['page', 'limit', 'sort','category']);
         $product = $this->productService->filterProduct($filters);
         return response()->json([
             'message' => 'Product filtered successfully',

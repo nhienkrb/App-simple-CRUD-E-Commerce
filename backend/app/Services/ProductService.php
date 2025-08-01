@@ -298,30 +298,38 @@ class ProductService
         }
     }
 
-    public function filterProduct(array $filters)
-    {
-        $query = Product::query();
+public function filterProduct(array $filters)
+{
+    $query = Product::query();
 
-        // Sắp xếp
-        if (isset($filters['sort'])) {
-            switch ($filters['sort']) {
-                case 'name_asc':
-                    $query->orderBy('product_name', 'asc');
-                    break;
-                case 'name_desc':
-                    $query->orderBy('product_name', 'desc');
-                    break;
-                case 'price_asc':
-                    $query->orderBy('price', 'asc');
-                    break;
-                case 'price_desc':
-                    $query->orderBy('price', 'desc');
-                    break;
-            }
-        }
-
-        // Phân trang
-        $limit = $filters['limit'] ?? 10;
-        return $query->paginate($limit);
+    // ✅ Lọc theo category (slug)
+    if (!empty($filters['category'])) {
+        $query->whereHas('category', function ($q) use ($filters) {
+            $q->where('slug', $filters['category']);
+        });
     }
+
+    // ✅ Sắp xếp
+    if (isset($filters['sort'])) {
+        switch ($filters['sort']) {
+            case 'name_asc':
+                $query->orderBy('product_name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('product_name', 'desc');
+                break;
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+        }
+    }
+
+    // ✅ Phân trang
+    $limit = $filters['limit'] ?? 10;
+    return $query->paginate($limit);
+}
+
 }
