@@ -1,6 +1,6 @@
 import { Avatar, Box, Container, Grid, Typography } from "@mui/material";
 import useCategories from "../../hooksCustom/useCategories";
-
+import { Link } from "react-router-dom";
 export default function ProductCatalog() {
   const categories = useCategories();
   return (
@@ -16,7 +16,12 @@ export default function ProductCatalog() {
           .filter((cat) => cat.category_name.length < 18) // lọc tên ngắn
           .slice(0, 7) // lấy 6 cái đầu
           .map((cat, index) => (
-            <Box key={index} >
+            <Box
+              key={index}
+              component={Link}
+              to={`/san-pham/${cat.slug}`}
+              sx={{ textAlign: "center", textDecoration: "none" , color: "black"}}
+            >
               <Avatar
                 src={cat.category_image}
                 alt={cat.category_name}
@@ -27,7 +32,7 @@ export default function ProductCatalog() {
                   borderRadius: 50,
                   border: "1px solid #f2f2f2",
                   cursor: "pointer",
-                  backgroundColor:"white",
+                  backgroundColor: "white",
                   "&:hover": {
                     transform: "scale(1.2)",
                     border: "2px solid #8c8c8c",

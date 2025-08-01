@@ -66,7 +66,7 @@ export default function ProductSidebar() {
               >
                 <Typography
                   component={RouteLink}
-                  to={`/the-loai/${itemCategory.slug}`}
+                  to={`/san-pham/${itemCategory.slug}`}
                   fontWeight={500}
                   variant="h4"
                   sx={{ textDecoration: "none", color:"white" }}
@@ -78,7 +78,7 @@ export default function ProductSidebar() {
                 {itemCategory.tag_name.map((tag_name,index) => (
                   <Typography key={index}
                    component={RouteLink}
-                    to={`/category/${itemCategory.slug}/${tag_name}`}
+                    to={`/san-pham/${itemCategory.slug}/${tag_name}`}
                     variant="h5"
                     sx={{ fontWeight: "500", p:.5 ,textDecoration: "none", color:"white" }}
                   >

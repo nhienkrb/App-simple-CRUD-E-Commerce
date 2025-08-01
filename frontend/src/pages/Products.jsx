@@ -1,88 +1,64 @@
 import { Box, Container, Grid } from "@mui/material";
 import ProductCard from "../components/ProductCard";
-import useFetchList from "../hooksCustom/useFetchList";
-import useQuery from "../hooksCustom/useQuery";
 import FilterProductComponent from "../components/filter/FilterProductComponent";
 import BreadcrumbNav from "../components/BreadcrumbNav";
 import { useEffect, useState } from "react";
 import ProductSidebar from "../components/filter/ProductSidebar";
+import { useParams } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL + "/products";
-
-function useFetchLists(url, options = {}) {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    if (!url) return;
-
-    fetch(url, options)
-      .then((res) => res.json())
-      .then((resData) => {
-        // ✅ Lấy đúng mảng sản phẩm
-        const products = resData?.data?.data ?? [];
-        setData(products);
-      })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-        setData([]); // fallback nếu lỗi
-      });
-  }, [url]);
-
-  return data;
-}
-
-
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function Products() {
-  // const products = useFetchList(API_URL, { method: "GET" });
-
+  const { categorySlug } = useParams();
   const [filter, setFilter] = useState("");
+  const [products, setProducts] = useState([]);
 
-  const  handleFilterChange =  (value) => {
+  const handleFilterChange = (value) => {
     setFilter(value);
   };
-  const queryString = filter ? `?page=1&limit=20&sort=${filter}` : "";
-  const products = useFetchLists(`${API_URL}/filter-products${queryString}`, {
-    method: "GET",
-  });
+
+  useEffect(() => {
+    let queryString = `?page=1&limit=20`;
+    if (filter) queryString += `&sort=${filter}`;
+    if (categorySlug) queryString += `&category=${categorySlug}`;
+
+    const url = `${BASE_URL}/products/filter-products${queryString}`;
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((resData) => {
+        const list = resData?.data?.data ?? [];
+        setProducts(list);
+      })
+      .catch((err) => {
+        console.error("Lỗi khi fetch sản phẩm:", err);
+        setProducts([]);
+      });
+  }, [filter, categorySlug]);
+
   return (
-    <Container
-      maxWidth="xl"
-      fixed
-      sx={{ justifyContent: "center", marginTop: "2rem" }}
-    >
-      {/* START <BreadcrumbNav /> */}
-      <Box sx={{ marginBottom: "1rem" }}>
+    <Container maxWidth="xl" fixed sx={{ mt: 4 }}>
+      <Box sx={{ mb: 2 }}>
         <BreadcrumbNav />
       </Box>
-        {/* END <BreadcrumbNav /> */}
-      <Grid container>
 
-        <Grid
-          size={{ sm: 3 }}
-          sx={{
-            display: { xs: "none", sm: "block" },
-          }}
-        >
-          <ProductSidebar/>
+      <Grid container spacing={2}>
+        {/* SIDEBAR */}
+        <Grid size={{xs:0, sm:3}}  sx={{ display: { xs: "none", sm: "block" } }}>
+          <ProductSidebar />
         </Grid>
 
-        <Grid container size={{ sm: 9 }}>
-          {/* START Filter Product */}
-          <Grid size={{ sm: 12 }}>
-            <FilterProductComponent onFilterChange = {handleFilterChange} />
-          </Grid>
-          {/* END Filter Product */}
+        {/* MAIN CONTENT */}
+        <Grid size={{xs:12, sm:9}} >
+          <FilterProductComponent onFilterChange={handleFilterChange} />
 
-          {/* START Collection Product */}
-          <Grid container size={{ sm: 12 }}>
+          <Grid container spacing={2} sx={{ mt: 1 }}>
             {products.map((product) => (
-              <Grid size={{ xs: 6, sm: 6, md: 4, lg: 3 }} key={product.id}>
-                <ProductCard key={product.id} product={product} />
+              <Grid size={{ xs: 6, sm: 4, md:3 }}  key={product.id}>
+                <ProductCard product={product} />
               </Grid>
             ))}
           </Grid>
-           {/* END Collection Product */}
         </Grid>
       </Grid>
     </Container>

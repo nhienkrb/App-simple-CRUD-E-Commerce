@@ -50,6 +50,7 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path="trang-chu" element={<Home />} />
               <Route path="san-pham" element={<Products />} />
+              <Route path="san-pham/:categorySlug" element={<Products />} />
               <Route path="tin-tuc" element={<News />} />
               <Route path="lien-he" element={<Contact />} />
               <Route path="gio-hang" element={<ShoppingCart />} />
