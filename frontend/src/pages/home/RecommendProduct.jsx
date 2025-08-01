@@ -39,7 +39,7 @@ useEffect(() => {
 
   return (
     <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-      <LineCut nameLine="SẢN PHẨM DÀNH CHO BẠN" />
+      <LineCut nameLine="SẢN PHẨM GỢI Ý CHO BẠN" />
 
       <Grid
         container
