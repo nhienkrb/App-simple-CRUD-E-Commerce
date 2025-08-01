@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -37,7 +38,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // Validate the request`
-       return $this->productService->create($request->all());
+        return $this->productService->create($request->all());
     }
 
     /**
@@ -78,7 +79,7 @@ class ProductController extends Controller
         // Trả về phản hồi JSON (hoặc có thể redirect)
         return response()->json([
             'message' => 'Product updated successfully.',
-            'product' => $product
+            'data' => $product
         ]);
     }
 
@@ -142,4 +143,51 @@ class ProductController extends Controller
         ], 200);
     }
 
+    public function recommend(Request $request)
+    {
+        $user = $request->user();
+
+        if ($user) {
+            // Đã đăng nhập → dựa theo lịch sử mua hàng
+            $boughtProductIds = DB::table('order_details')
+                ->join('orders', 'orders.id', '=', 'order_details.order_id')
+                ->where('orders.user_id', $user->id)
+                ->where('orders.created_at', '>=', now()->subDays(15))
+                ->pluck('order_details.product_id')
+                ->unique();
+
+            $categoryIds = Product::whereIn('id', $boughtProductIds)->pluck('category_id')->unique();
+
+            $recommended = Product::whereIn('category_id', $categoryIds)
+                ->whereNotIn('id', $boughtProductIds)
+                ->limit(10)
+                ->get();
+
+            return response()->json([
+                'products' => $recommended,
+                'message' => "Gợi ý theo lịch sử mua hàng"
+            ]);
+        }
+
+        $cartProductIds = $request->input('cart_product_ids', []);
+
+        if (empty($cartProductIds)) {
+            return response()->json([
+                'products' => [],
+                'message' => 'Không có dữ liệu giỏ hàng'
+            ]);
+        }
+
+        $categoryIds = Product::whereIn('id', $cartProductIds)->pluck('category_id')->unique();
+
+        $recommended = Product::whereIn('category_id', $categoryIds)
+            ->whereNotIn('id', $cartProductIds)
+            ->limit(10)
+            ->get();
+
+        return response()->json([
+            'products' => $recommended,
+            'message' => "Gợi ý theo giỏ hàng"
+        ]);
+    }
 }

@@ -86,6 +86,8 @@ Route::middleware('auth:sanctum')->get('/v1/payment/order-temp', function (Reque
     return response()->json(['payload' => $payload]);
 });
 
+Route::post('/v1/recommend-products', [ProductController::class, 'recommend']);
+
 // API resources with versioning
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
