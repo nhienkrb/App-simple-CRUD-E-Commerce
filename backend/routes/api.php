@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ChatBotController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\PaymentController;
@@ -87,7 +88,11 @@ Route::middleware('auth:sanctum')->get('/v1/payment/order-temp', function (Reque
 });
 
 Route::post('/v1/recommend-products', [ProductController::class, 'recommend']);
-
+Route::prefix('/v1/dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/top3-products', [DashboardController::class, 'getTop3ProductsController']);
+    Route::get('/top3-products/month', [DashboardController::class, 'getTop3ProductsByMonth']);
+});
 // API resources with versioning
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
