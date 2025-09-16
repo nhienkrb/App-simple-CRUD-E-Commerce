@@ -35,7 +35,7 @@ export default function ProductCatalog() {
                   backgroundColor: "white",
                   "&:hover": {
                     transform: "scale(1.2)",
-                    border: "2px solid #8c8c8c",
+                    border: "2px solid #8c181e",
                   },
                 }}
               />
