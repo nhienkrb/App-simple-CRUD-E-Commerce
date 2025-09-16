@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-export default function LineCut({ nameLine, fontSize }) {
+export default function LineCut({ nameLine, fontSize, bg_nen,colorNameLine }) {
   return (
     <Box display="flex" alignItems="center" mb={2}>
       {/* dòng đỏ trái */}
@@ -11,9 +11,9 @@ export default function LineCut({ nameLine, fontSize }) {
         mx={2}
         sx={{
           position: "relative",
-          width: 300,           // điều chỉnh chiều rộng theo ảnh thật
-          height: 47,           // điều chỉnh chiều cao theo ảnh thật
-          backgroundImage: "url(/img/bg-contact1.png)",
+          width: 300, // điều chỉnh chiều rộng theo ảnh thật
+          height: 47, // điều chỉnh chiều cao theo ảnh thật
+          backgroundImage: `url(${bg_nen || "/img/bg-contact1.png"})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -22,7 +22,7 @@ export default function LineCut({ nameLine, fontSize }) {
         <Typography
           fontWeight="bold"
           fontFamily={"UTM Seagull"}
-          color="#8c181e"        // hoặc màu phù hợp với nền ảnh
+          color= {`${colorNameLine??"#8c181e"}`}   // hoặc màu phù hợp với nền ảnh
           sx={{
             position: "absolute",
             top: "50%",
@@ -30,7 +30,7 @@ export default function LineCut({ nameLine, fontSize }) {
             transform: "translate(-50%, -50%)",
             whiteSpace: "nowrap",
             padding: "6px 20px",
-            fontSize: fontSize
+            fontSize: fontSize,
           }}
         >
           {nameLine}
