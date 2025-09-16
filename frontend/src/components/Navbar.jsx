@@ -23,6 +23,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DrawerNavbar from "./DrawerNavbar";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import SearchBar from "./SearchBar";
 const PAGES = [
   { label: "Trang Chủ", path: "/trang-chu" },
   { label: "Sản Phẩm", path: "/san-pham" },
@@ -60,8 +61,8 @@ export default function Navbar() {
   };
   return (
     <AppBar
-      sx={{ backgroundColor: "#7a9c59", position: "static" }}
-      elevation={2}
+      sx={{marginTop:3, paddingY:1,background: "url('../../public/img/bg-body-re.png')" , position: "static", fontWeight:"600", color:"#000" ,fontFamily: "UTM Seagull"}} 
+      elevation={0}
     >
       <Container maxWidth="xl" disableGutters>
         <Toolbar>
@@ -97,21 +98,30 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link
-                component={RouterLink}
-                color="white"
-                to="/trang-chu"
-                sx={{ fontSize: "2em" }}
-                underline="none"
-              >
-                Tea-Plus
-              </Link>
+                  <Link
+                      component={RouterLink}
+                      to="/trang-chu"
+                      underline="none"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img
+                        src="/Logo-Bach-Lien-06-01.png"
+                        alt="Bạch Liên"
+                        style={{
+                          width: "60px",   // bạn chỉnh số này (50px - 80px) cho phù hợp
+                          height: "auto",  // giữ tỉ lệ
+                        }}
+                      />
+                  </Link>
               <Tabs
                 onChange={(e, value) => setActiveNavLinkStyle(value)}
-                textColor="inherit"
+                // textColor="bachLien"
                 value={activeNavLinkStyle}
                 indicatorColor="secondary"
-                sx={{ marginLeft: "20px" }}
+                sx={{ marginLeft: "20px", color:"#8c181e" }}
               >
                 {PAGES.map((page, index) => (
                   <Tab
@@ -119,10 +129,11 @@ export default function Navbar() {
                     label={page.label}
                     component={RouterLink}
                     to={page.path}
+                    sx={{fontSize: "1rem",fontFamily: "UTM Seagull", fontWeight:600, textTransform:"capitalize", color:'#000000'}}
                   />
                 ))}
               </Tabs>
-
+             
               <Box
                 sx={{
                   marginLeft: "auto",
@@ -131,14 +142,17 @@ export default function Navbar() {
                   alignItems: "center",
                 }}
               >
+                 <Box>
+                  <SearchBar/>
+                </Box>
                 {/* Giỏ hàng */}
                 <IconButton
                   sx={{
-                    color: "white",
+                    color: "#8c181e",
                     marginRight: 5,
                     borderRadius: "3px",
                     "&:hover": {
-                      border: "1.5px solid #fff",
+                      border: "1.5px solid #8c181e",
                       borderRadius: "3px",
                       backgroundColor: "transparent",
                     },
@@ -166,7 +180,7 @@ export default function Navbar() {
                     </IconButton>
                   </Tooltip>
                 ) : (
-                  <Button variant="body1" sx={{ color: "white",borderColor:"white", borderWidth: "1px",borderStyle: "solid" }} onClick={handleLogin}>
+                  <Button color="primary" sx={{fontWeight:"600",borderColor:"#8c181e", borderWidth: "1px",borderStyle: "solid" }} onClick={handleLogin}>
                     Đăng nhập
                   </Button>
                 )}
