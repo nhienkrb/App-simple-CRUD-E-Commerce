@@ -35,7 +35,7 @@ export default function ProductCard({ product }) {
     position: "absolute",
     top: "15%",
     left: "-3%",
-    display: product.is_active ? "block" : "none",
+    display: product.is_active ? "none" : "block",
     borderRadius: "50%",
     backgroundColor: "#7eae1d",
     padding: "5px 10px",
@@ -52,7 +52,7 @@ export default function ProductCard({ product }) {
     width: "100%",
     height: "15%",
     backgroundColor: "rgba(255, 255, 255, 0.5)", // nền trắng mờ
-    display: product.is_active ? "none" : "flex",
+    display: product.is_active ? "flex" : "none",
     justifyContent: "center",
     alignItems: "center",
   };
