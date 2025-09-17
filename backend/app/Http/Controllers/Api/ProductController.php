@@ -190,4 +190,74 @@ class ProductController extends Controller
             'message' => "Gợi ý theo giỏ hàng"
         ]);
     }
+
+    
+    public function findByCategorySlug($slug)
+    {
+        $isWithProduct = request()->boolean("isProduct");
+        // Kiểm tra xem slug có được cung cấp hay không
+        if (empty($slug)) {
+            return response()->json([
+                'message' => 'Slug is required',
+            ], 400);
+        }
+        // Tìm sản phẩm theo slug
+        $product = $this->productService->getProductBySlug($slug,$isWithProduct);
+        if ($product == null) {
+            // Trả về JSON với mã lỗi 404 khi không tìm thấy sản phẩm
+            return response()->json([
+                'message' => 'Product not found',
+            ], 404);
+        }
+
+        // Trả về thông tin sản phẩm dưới dạng JSON
+        return response()->json([
+            'message' => 'Product found',
+            'data' => $product,
+        ], 200);
+    }
+
+       public function getAllFeaturedProducts()
+    {
+        // Tìm sản phẩm theo slug
+        $product = $this->productService->getFeaturedProducts();
+        if ($product == null) {
+            // Trả về JSON với mã lỗi 404 khi không tìm thấy sản phẩm
+            return response()->json([
+                'message' => 'Product not found',
+            ], 404);
+        }
+
+        // Trả về thông tin sản phẩm dưới dạng JSON
+        return response()->json([
+            'message' => 'Product found',
+            'data' => $product,
+        ], 200);
+    }
+
+      public function search()
+    {
+        $productName = request()->get("search");
+        // Kiểm tra xem slug có được cung cấp hay không
+        if (empty($productName)) {
+            return response()->json([
+                'message' => 'Slug is required',
+            ], 400);
+        }
+        // Tìm sản phẩm theo slug
+        $product = $this->productService->getSearchProducts($productName);
+        if ($product == null) {
+            // Trả về JSON với mã lỗi 404 khi không tìm thấy sản phẩm
+            return response()->json([
+                'message' => 'Product not found',
+            ], 404);
+        }
+
+        // Trả về thông tin sản phẩm dưới dạng JSON
+        return response()->json([
+            'message' => 'Product found',
+            'data' => $product,
+        ], 200);
+    }
+
 }

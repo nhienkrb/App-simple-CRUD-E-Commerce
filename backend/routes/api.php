@@ -13,9 +13,6 @@ use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PaymentMoMoController;
 use App\Http\Controllers\Api\UserController;
-use App\Models\Category;
-use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 
 /*
@@ -53,6 +50,8 @@ Route::controller(ProductController::class)->prefix('v1/products')->group(functi
     Route::get('search', 'search')->name('products.search');
     Route::get('slug/{slug}', 'findBySlug')->name('products.findBySlug');
     Route::get('filter-products', 'filterProduct')->name('products.filterProduct');
+    Route::get('category/{slug}?isProduct=', 'findByCategorySlug')->name('products.findByCategorySlug');
+    Route::get('featured', 'getAllFeaturedProducts')->name('products.getAllFeaturedProducts');
 });
 
 Route::controller(CategoryController::class)->prefix('v1/categories')->group(function () {
@@ -67,7 +66,7 @@ Route::middleware('auth:sanctum')
     });
 
 Route::prefix('v1/orders/')->group(function () {
-        Route::get('order-manager', [OrderController::class, 'index']);
+    Route::get('order-manager', [OrderController::class, 'index']);
     Route::get('orders/{id}', [OrderController::class, 'show']);
     Route::get('user/orders', [OrderController::class, 'userOrders']);
 });

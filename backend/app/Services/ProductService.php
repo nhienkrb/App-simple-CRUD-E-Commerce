@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Cloudinary\Cloudinary;
@@ -143,7 +144,51 @@ class ProductService
         return Product::where('slug', $slug)->with('inforProduct')->first();
     }
 
- public function delete(int $id): array
+    public function getProductBySlug($slug, $withProducts = false)
+    {
+        $category = Category::select("id", "category_name", "slug", "category_image")->where('slug', $slug)->firstOrFail();
+        // dd($category->products()->get());
+        if ($withProducts) {
+            $products = $category->products()
+                ->select('id', 'product_name', 'slug', 'image')
+                ->where('is_active', 'true')
+                ->limit(10)
+                ->get();
+
+            return [
+                'category' => $category,
+                'products' => $products,
+            ];
+        }
+
+        return $category;
+    }
+
+
+    public function getFeaturedProducts()
+    {
+        $products = Product::select('id', 'product_name', 'price', 'image', 'created_at', 'is_active')
+            ->where('is_active', true)
+            ->limit(10)
+            ->get();
+
+        return $products;
+    }
+
+    public function getSearchProducts($productsName)
+    {
+        $products = Product::select('id', 'product_name', 'price', 'image', 'created_at', 'is_active')
+            ->where('product_name', 'like', "%{$productsName}%")
+            ->get();
+        return $products;
+    }
+
+
+
+
+
+
+    public function delete(int $id): array
     {
         $product = Product::with('variants', 'inforProduct')->find($id);
 
@@ -285,7 +330,6 @@ class ProductService
                 'status' => true,
                 'message' => 'Cập nhật sản phẩm thành công'
             ];
-
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Cập nhật sản phẩm thất bại: ' . $e->getMessage());
@@ -298,38 +342,37 @@ class ProductService
         }
     }
 
-public function filterProduct(array $filters)
-{
-    $query = Product::query();
+    public function filterProduct(array $filters)
+    {
+        $query = Product::query();
 
-    // ✅ Lọc theo category (slug)
-    if (!empty($filters['category'])) {
-        $query->whereHas('category', function ($q) use ($filters) {
-            $q->where('slug', $filters['category']);
-        });
-    }
-
-    // ✅ Sắp xếp
-    if (isset($filters['sort'])) {
-        switch ($filters['sort']) {
-            case 'name_asc':
-                $query->orderBy('product_name', 'asc');
-                break;
-            case 'name_desc':
-                $query->orderBy('product_name', 'desc');
-                break;
-            case 'price_asc':
-                $query->orderBy('price', 'asc');
-                break;
-            case 'price_desc':
-                $query->orderBy('price', 'desc');
-                break;
+        // ✅ Lọc theo category (slug)
+        if (!empty($filters['category'])) {
+            $query->whereHas('category', function ($q) use ($filters) {
+                $q->where('slug', $filters['category']);
+            });
         }
+
+        // ✅ Sắp xếp
+        if (isset($filters['sort'])) {
+            switch ($filters['sort']) {
+                case 'name_asc':
+                    $query->orderBy('product_name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('product_name', 'desc');
+                    break;
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+            }
+        }
+
+        // ✅ Phân trang
+        $limit = $filters['limit'] ?? 10;
+        return $query->paginate($limit);
     }
-
-    // ✅ Phân trang
-    $limit = $filters['limit'] ?? 10;
-    return $query->paginate($limit);
-}
-
 }
