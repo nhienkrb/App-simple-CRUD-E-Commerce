@@ -8,6 +8,9 @@ import RecommendProduct from "./RecommendProduct";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import PromoBanner from "./PromoBanner";
+import NewsTeaSections from "./NewsTeaSections";
+import TeaAccessoriesTeaSection from "./TeaAccessoriesTeaSection";
+import GiftSection from "./GiftsTeaSection";
 export default function Home() {
   const { token } = useAuth();
   const { cartItems } = useCart();
@@ -20,8 +23,11 @@ export default function Home() {
       <ProductCatalog />
       {shouldShowRecommend && <RecommendProduct />}
       <ProductList />
-      <Promotions />
+      <TeaAccessoriesTeaSection/>
       <SlideProduct />
+      <GiftSection/> 
+      <Promotions />
+      <NewsTeaSections/>
     </div>
   );
 }
