@@ -15,7 +15,7 @@ export default function SlideProduct() {
 
   const settings = {
     infinite: true,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     speed: 6000,
