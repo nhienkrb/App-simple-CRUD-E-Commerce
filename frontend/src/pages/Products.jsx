@@ -5,6 +5,7 @@ import BreadcrumbNav from "../components/BreadcrumbNav";
 import { useEffect, useState } from "react";
 import ProductSidebar from "../components/filter/ProductSidebar";
 import { useParams } from "react-router-dom";
+import ProductViewed from "./product/ProductViewed";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -59,6 +60,9 @@ export default function Products() {
               </Grid>
             ))}
           </Grid>
+        </Grid>
+        <Grid size={{xs:12, sm:12,md:12}}>
+          <ProductViewed />
         </Grid>
       </Grid>
     </Container>

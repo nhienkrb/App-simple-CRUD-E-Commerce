@@ -31,7 +31,7 @@ export default function ProductSidebar() {
       p={1}
       display="flex"
       flexDirection="column"
-      sx={{ backgroundColor: "#A5C07B" }}
+      sx={{ backgroundColor: "#8c181e" }}
       color="white"
     >
       <Box border={1} p={1}>
@@ -52,7 +52,7 @@ export default function ProductSidebar() {
               }}
               sx={{
                 boxShadow: "none",
-                backgroundColor: "#A5C07B",
+                backgroundColor: "#8c181e",
                 color: "white",
               }}
             >
