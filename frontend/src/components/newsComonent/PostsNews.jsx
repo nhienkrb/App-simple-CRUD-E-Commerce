@@ -14,25 +14,17 @@ export default function PostsNews(){
           <Box>
             <Box component={"div"} sx={{ textAlign: "center", mb: 2 }}>
               <Typography
-                fontSize={15}
-                fontWeight={700}
-                variant="h6"
-                gutterBottom
-              >
-                News
-              </Typography>
-              <Typography
                 component={RouterLink}
                 to={"/home"}
                 fontWeight={700}
-                variant="h5"
+                variant="h2"
                 sx={{
                   cursor: "pointer",
                   textDecoration: "none",
-                  color: "inherit",
                 }}
+                color="primary"
               >
-                This is the news section where you can find
+                Đây là phần tin tức nơi bạn có thể tìm thấy
               </Typography>
             </Box>
 
@@ -64,13 +56,7 @@ export default function PostsNews(){
                   width: "100%",
                 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+               Trải dải qua hai huyện Vị Xuyên và Hoàng Su Phì, có một ngọn núi cheo leo hiểm trở nằm ở phía Tây của tỉnh Hà Giang với độ cao 2.427m so với mực nước biển – núi Tây Côn Lĩnh. Nơi đây không chỉ được biết đến với tên gọi “nóc nhà của Đông Bắc”, hay những cung đường khó chinh phục mà Tây Côn Lĩnh còn được người ta nhớ tới bởi một loại trà đặc sản, làm nức lòng vùng đất Hà Giang với tên gọi trà Shan Tuyết Tây Côn Lĩnh được ví như “Vua” của các loại trà.
               </Typography>
 
               <Box sx={{ textAlign: "center" }}>
@@ -78,12 +64,12 @@ export default function PostsNews(){
                   variant="outlined"
                   sx={{
                     fontWeight: "600",
-                    border: "2px solid #7a9c59",
-                    color: "#7a9c59",
+                    border: "2px solid #8c181e",
+                    color: "#8c181e",
                     "&:hover": {
-                      backgroundColor: "#7a9c59",
-                      color: "#fff",
-                      border: "1px solid #7a9c59",
+                      backgroundColor: "#8c181e",
+                      color: "#FFF",
+                      border: "1px solid #8c181e",
                       fontWeight: "600",
                     },
                   }}
@@ -92,7 +78,10 @@ export default function PostsNews(){
                     component={RouterLink}
                     to="/news"
                     underline="none"
-                    color="inherit"
+                    color="#8c181e"
+                    sx={{"&:hover": {
+                      color: "#FFF",
+                    },}}
                   >
                     Read More
                   </Link>

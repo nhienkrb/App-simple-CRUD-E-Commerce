@@ -6,8 +6,8 @@ export default function PostsLatest(){
   return (
            <Grid size={{ sx: 12, sm: 12, md: 3, lg: 3, xl: 3 }}>
           <Box sx={{ p: 2 }}>
-            <Typography fontSize={15} fontWeight={"bold"}>
-              ABOUT
+            <Typography fontSize={15} fontWeight={"bold"} fontFamily={"UTM Seagull"} color="primary">
+              Về chúng tôi
             </Typography>
             <Typography mt={1}>
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
@@ -37,8 +37,8 @@ export default function PostsLatest(){
                 bgcolor={"#fff"}
                 sx={{
                   textAlign: "center",
-                  border: "2px solid #7a9c59",
-                  color: "#7a9c59",
+                  border: "2px solid #8c181e",
+                  color: "#8c181e",
                   fontWeight: "600",
                 }}
               >
