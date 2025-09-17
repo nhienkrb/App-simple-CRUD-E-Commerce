@@ -150,7 +150,7 @@ class ProductService
         // dd($category->products()->get());
         if ($withProducts) {
             $products = $category->products()
-                ->select('id', 'product_name', 'slug', 'image')
+                ->select('id', 'product_name', 'slug', 'image',"price")
                 ->where('is_active', 'true')
                 ->limit(10)
                 ->get();

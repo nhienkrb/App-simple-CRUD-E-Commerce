@@ -50,7 +50,7 @@ Route::controller(ProductController::class)->prefix('v1/products')->group(functi
     Route::get('search', 'search')->name('products.search');
     Route::get('slug/{slug}', 'findBySlug')->name('products.findBySlug');
     Route::get('filter-products', 'filterProduct')->name('products.filterProduct');
-    Route::get('category/{slug}?isProduct=', 'findByCategorySlug')->name('products.findByCategorySlug');
+    Route::get('category/{slug}', 'findByCategorySlug')->name('products.findByCategorySlug');
     Route::get('featured', 'getAllFeaturedProducts')->name('products.getAllFeaturedProducts');
 });
 
