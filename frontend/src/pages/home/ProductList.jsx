@@ -16,7 +16,7 @@ export default function ProductList() {
         </Typography>
         <Box flex={1} height="1px" bgcolor="gray" />
       </Box> */}
-        <LineCut nameLine="HỘP TRÀ CAO CẤP" />
+        <LineCut nameLine="HỘP TRÀ CAO CẤP" fontSize={"1.4rem"} />
 
       <Grid
         container
