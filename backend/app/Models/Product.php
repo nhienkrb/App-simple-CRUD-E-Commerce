@@ -17,7 +17,7 @@ class Product extends Model
         'price' => 'float',
         'quantity' => 'integer',
     ];
-protected $with = ['orderProductImages', 'variants', 'inforProduct', 'category'];
+    // protected $with = ['orderProductImages', 'variants', 'inforProduct'];
 
     protected static function booted(){
         parent::booted();
