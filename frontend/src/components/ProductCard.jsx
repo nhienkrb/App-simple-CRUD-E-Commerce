@@ -117,16 +117,16 @@ export default function ProductCard({ product }) {
               variant="outlined"
               size="small"
               sx={{
-                borderColor: "rgb(206, 58, 58)",
-                color: "rgb(206, 58, 58)",
+                borderColor: "8c181e",
+                color: "8c181e",
                 "&:hover": {
                   color: "white",
-                  background: "#7a9c59",
-                  borderColor: "#7a9c59",
+                  background: "#8c181e",
+                  borderColor: "#8c181e",
                 },
               }}
             >
-              Add to Cart
+              Thêm Vào Giỏ
             </Button>
           </Box>
         </CardContent>
