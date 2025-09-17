@@ -20,14 +20,14 @@ export default function ProvisionalPayment({setShowCheckout}) {
       >
         <Box sx={{ maxWidth: 400 }} elevation={3} mt={5}>
           <Typography sx={{ mb: 1 }}>
-            <span>Total Product:</span>
+            <span>Tổng sản phẩm:</span>
             <span style={{ float: "right", fontWeight: "bold" }}>
               {typeof countCartItems === "function" ? countCartItems() : 0}
             </span>
           </Typography>
 
           <Box sx={{ mb: 5, fontWeight: "bold", fontSize: "1em", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-            <span style={{ color: "#c9ae63", }}>Provisional Payment</span>
+            <span style={{ color: "#c9ae63", }}>Tổng Tiền:</span>
             <span style={{
                 fontWeight: "bold",
                 marginLeft: "10rem",
@@ -67,7 +67,7 @@ export default function ProvisionalPayment({setShowCheckout}) {
               fontWeight: "bold",
             }}
           >
-            Continue Shopping
+            Tiếp tục mua hàng
           </Button>
         </Box>
 
@@ -89,7 +89,7 @@ export default function ProvisionalPayment({setShowCheckout}) {
               fontWeight: "bold",
             }}
           >
-            Order
+            Thanh Toán
           </Button>
         </Box>
       </Grid>

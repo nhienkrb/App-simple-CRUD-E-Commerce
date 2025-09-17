@@ -11,12 +11,13 @@ export default function ShoppingCart() {
   return (
     <Container maxWidth="xl" style={{ marginTop: "20px" }}>
       <Typography variant="h1" component="h1" gutterBottom>
-        Shopping Cart
+       Giỏ Hàng Của Bạn
       </Typography>
        
       {cartItems.length === 0 ? (
         <Typography variant="h4" component="h2" color="textSecondary" align="center">
-          Your shopping cart is currently empty.
+          Giỏ Hàng Của Bạn Đang Trống
+          
         </Typography>
       ) : (
         <CartTable cartItems={cartItems} deleteItem={(productName)=>deleteItem(productName)} />
