@@ -73,8 +73,8 @@ export default function ProductCard({ product }) {
           width: "100%",
           maxWidth: "100%",
           color: {
-            xs: "red", // màu đỏ khi ở xs
-            sm: "inherit", // từ sm trở lên, dùng màu mặc định
+            xs: "#8c181e", // màu đỏ khi ở xs
+            sm: "#8c181e", // từ sm trở lên, dùng màu mặc định
           },
           marginBottom:2
         }}
@@ -107,7 +107,8 @@ export default function ProductCard({ product }) {
                   }} color="inherit" variant="body1"  fontWeight="600" to={`/san-pham-chi-tiet/${product.slug}`}>
             {product.product_name}
           </Typography>
-          <Typography variant="h6" color="error" fontWeight={700}>
+          <Typography variant="h6" color="black" fontWeight={700}>
+
             {product.price.toLocaleString()} ₫
           </Typography>
           <Box mt={1}>
