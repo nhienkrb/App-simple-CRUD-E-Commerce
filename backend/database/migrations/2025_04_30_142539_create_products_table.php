@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('product_name', 255)->nullable(false);
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2)->check('price >= 0')->nullable(false);
+            $table->decimal('price', 10, 3)->check('price >= 0')->nullable(false);
             $table->integer('quantity')->check('quantity >= 0')->nullable(false);
             $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
