@@ -34,7 +34,7 @@ export default function ProductDetail() {
     <>
       <Grid size={{ xs: 12, sm: 4, md: 4 }}>
         <Box>
-          <CarouselProductDetail />
+          <CarouselProductDetail idProduct={product.data.id} />
         </Box>
       </Grid>
       <Grid size={{ xs: 12, sm: 5, md: 5 }}>
@@ -45,7 +45,9 @@ export default function ProductDetail() {
         >
           {product.data?.product_name || "None"}
         </Typography>
-        <Typography variant="h2">{product.data?.price.toLocaleString() || "0"}₫</Typography>
+        <Typography variant="h2">
+          {product.data?.price.toLocaleString() || "0"}₫
+        </Typography>
         <Box
           component={"div"}
           dangerouslySetInnerHTML={{
@@ -109,12 +111,12 @@ export default function ProductDetail() {
       <Grid size={{ xs: 12, sm: 12, md: 12 }} mt={5}>
         <LineCut nameLine="SẢN PHẨM CÙNG LOẠI" />
       </Grid>
-      <Grid size={{ xs: 12, sm: 12, md:12 }} mt={ 5}>
+      <Grid size={{ xs: 12, sm: 12, md: 12 }} mt={5}>
         <ProductRecommend />
-      </Grid> 
+      </Grid>
 
-           <Grid size={{ xs: 12, sm: 12, md: 12 }} mt={5}>
-        <LineCut nameLine="TEA-PLUS" fontSize="h1"/>
+      <Grid size={{ xs: 12, sm: 12, md: 12 }} mt={5}>
+        <LineCut nameLine="TEA-PLUS" fontSize="h1" />
       </Grid>
     </>
   );
