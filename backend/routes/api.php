@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PaymentMoMoController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\OrderProductImageControllor;
 use Illuminate\Support\Facades\Log;
 
 /*
@@ -53,6 +54,8 @@ Route::controller(ProductController::class)->prefix('v1/products')->group(functi
     Route::get('category/{slug}', 'findByCategorySlug')->name('products.findByCategorySlug');
     Route::get('featured', 'getAllFeaturedProducts')->name('products.getAllFeaturedProducts');
 });
+
+Route::get('v1/order-product-images/{productId}', [OrderProductImageControllor::class, 'getImagesByProductId']);
 
 Route::controller(CategoryController::class)->prefix('v1/categories')->group(function () {
     Route::get('names', 'getNames')->name('categories.getNames');

@@ -3,47 +3,29 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\OrderProductImageService;
 
 class OrderProductImageControllor extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $orderProductImageService;
+
+    public function __construct(OrderProductImageService $orderProductImageService)
     {
-        //
+        $this->orderProductImageService = $orderProductImageService;
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Lấy tất cả ảnh theo id sản phẩm
+     *
+     * @param int $productId
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function getImagesByProductId($productId)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $images = $this->orderProductImageService->getImagesByProductId($productId);
+        return response()->json([
+            'success' => true,
+            'data' => $images
+        ]);
     }
 }
