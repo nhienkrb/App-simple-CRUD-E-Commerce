@@ -10,11 +10,11 @@ export default function NewsProduct() {
         textAlign="center"
         sx={{
           fontWeight: "bold",
-          color: "primary.success",
           borderBottom: "1px solid #ccc",
         }}
+        color="primary"
       >
-        News
+        Tin Mới
       </Typography>
       {/*content title news */}
       <Box
@@ -58,7 +58,7 @@ export default function NewsProduct() {
           component={"img"}
           sx={{  height: "auto", width:{ xs: "100%", sm: "40%" } }}
 
-          src="https://bachlien.vn/wp-content/uploads/2025/04/tra-buoi-mat-ong.jpeg"
+          src="https://bachlien.vn/wp-content/uploads/2023/05/tra-gao-nut-2048x1369.jpg"
           alt="Product"
         />
         <Box>
@@ -72,7 +72,39 @@ export default function NewsProduct() {
             variant="body2"
             lineHeight={1.3}
           >
-            Khám phá những loại đồ uống có lợi cho sức khỏe vào mùa hè
+              Trà gạo lứt đậu đỏ: Thức uống giảm cân bổ dưỡng cho mùa hè
+          </Typography>
+        </Box>
+      </Box>
+
+
+        <Box
+        p={0.8}
+        display="flex"
+        gap={2}
+        flexDirection={{ xs: "column", sm: "row" }}
+        justifyContent="space-between"
+      >
+        <Box
+          component={"img"}
+          sx={{  height: "auto", width:{ xs: "100%", sm: "40%" } }}
+
+          src="https://bachlien.vn/wp-content/uploads/2025/06/tra-shan-tuyet-yen-bai.jpg"
+          alt="Product"
+        />
+        <Box>
+          <Typography
+            component={RouteLink}
+            sx={{
+              fontFamily: "UTM Seagull",
+              textDecoration: "none",
+              color: "primary.black",
+            }}
+            variant="body2"
+            lineHeight={1.3}
+          >
+              	
+              Trà vàng Sùng Đô: Mùi nắng, hương núi và khí trà mạnh mẽ
           </Typography>
         </Box>
       </Box>

@@ -41,11 +41,11 @@ export default function ProductDetail() {
         <Typography
           variant="h1"
           sx={{ lineHeight: 1.5, fontFamily: "UTM Seagull" }}
-          color="secondary.main"
+          color="primary"
         >
           {product.data?.product_name || "None"}
         </Typography>
-        <Typography variant="h2">{product.data?.price || "0"}₫</Typography>
+        <Typography variant="h2">{product.data?.price.toLocaleString() || "0"}₫</Typography>
         <Box
           component={"div"}
           dangerouslySetInnerHTML={{
