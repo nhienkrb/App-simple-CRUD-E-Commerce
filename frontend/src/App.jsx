@@ -18,14 +18,14 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import FloatingSocialButtons from "./components/FloatingSocialButtons";
 import ChatBotSupport from "./components/ChatBotSupport";
 import PaymentSuccess from "./pages/PaymentSuccess";
-
+import { ViewedProvider } from "./context/ViewedProduct";
 function MainLayout() {
   return (
     <>
       <Navbar />
       <Outlet />
       <FloatingSocialButtons />
-            <ChatBotSupport />
+      <ChatBotSupport />
 
       <Footer />
     </>
@@ -35,35 +35,40 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <CartProvider>
-          <Routes>
-            {/* Công khai */}
-            <Route path="/login" element={<SignIn />} />
-            <Route path="/register" element={<SignUp />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="cart" element={<ShoppingCart />} /> 
-                 <Route path="payment-success" element={<PaymentSuccess />} /> 
-            </Route>
-            {/* Layout chung: Navbar + Footer */}
-            <Route path="/" element={<MainLayout />}>
-              {/* Public routes */}
-              <Route index element={<Home />} />
-              <Route path="trang-chu" element={<Home />} />
-              <Route path="san-pham" element={<Products />} />
-              <Route path="san-pham/:categorySlug" element={<Products />} />
-              <Route path="tin-tuc" element={<News />} />
-              <Route path="lien-he" element={<Contact />} />
-              <Route path="gio-hang" element={<ShoppingCart />} />
-              <Route path="san-pham-chi-tiet" element={<LayoutProductDetail />}>
-                <Route index element={<Products />} />
-                <Route path=":slug" element={<ProductDetail />} />
+        <ViewedProvider>
+          <CartProvider>
+            <Routes>
+              {/* Công khai */}
+              <Route path="/login" element={<SignIn />} />
+              <Route path="/register" element={<SignUp />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="cart" element={<ShoppingCart />} />
+                <Route path="payment-success" element={<PaymentSuccess />} />
               </Route>
-              <Route path="*" element={<NoPage />} />
+              {/* Layout chung: Navbar + Footer */}
+              <Route path="/" element={<MainLayout />}>
+                {/* Public routes */}
+                <Route index element={<Home />} />
+                <Route path="trang-chu" element={<Home />} />
+                <Route path="san-pham" element={<Products />} />
+                <Route path="san-pham/:categorySlug" element={<Products />} />
+                <Route path="tin-tuc" element={<News />} />
+                <Route path="lien-he" element={<Contact />} />
+                <Route path="gio-hang" element={<ShoppingCart />} />
+                <Route
+                  path="san-pham-chi-tiet"
+                  element={<LayoutProductDetail />}
+                >
+                  <Route index element={<Products />} />
+                  <Route path=":slug" element={<ProductDetail />} />
+                </Route>
+                <Route path="*" element={<NoPage />} />
 
-              {/* Protected routes */}
-            </Route>
-          </Routes>
-        </CartProvider>
+                {/* Protected routes */}
+              </Route>
+            </Routes>
+          </CartProvider>
+        </ViewedProvider>
       </AuthProvider>
     </BrowserRouter>
   );

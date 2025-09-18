@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Grid,
   Card,
@@ -10,8 +10,10 @@ import {
   Avatar,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {Link as RouteLink } from "react-router-dom";
+import { Link as RouteLink } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { ViewedContext } from "../context/ViewedProduct";
+
 const favoriteIcon = {
   position: "absolute",
   top: 10,
@@ -30,6 +32,7 @@ const favoriteIcon = {
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart();
+  const { addItem: addViewedItem } = useContext(ViewedContext); // Sử dụng context
 
   const sale = {
     position: "absolute",
@@ -57,14 +60,19 @@ export default function ProductCard({ product }) {
     alignItems: "center",
   };
 
+  // Hàm xử lý khi click vào tên sản phẩm
+  const handleViewProduct = () => {
+    addViewedItem({ product });
+  };
+
   return (
     <Box
       sx={{
         position: "relative",
         display: "flex",
         justifyContent: {
-          xs: "center", // căn giữa trên mobile
-          sm: "flex-start", // từ sm trở lên thì không căn giữa
+          xs: "center",
+          sm: "flex-start",
         },
       }}
     >
@@ -73,10 +81,10 @@ export default function ProductCard({ product }) {
           width: "100%",
           maxWidth: "100%",
           color: {
-            xs: "#8c181e", // màu đỏ khi ở xs
-            sm: "#8c181e", // từ sm trở lên, dùng màu mặc định
+            xs: "#8c181e",
+            sm: "#8c181e",
           },
-          marginBottom:2
+          marginBottom: 2,
         }}
       >
         <CardMedia
@@ -96,19 +104,26 @@ export default function ProductCard({ product }) {
           <Typography variant="subtitle2" color="text.secondary">
             {new Date(product.created_at).toLocaleDateString("vi-Vn")}
           </Typography>
-          <Typography component={RouteLink} 
-          sx={{   textDecoration: "none",
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical", // 	Xác định hiển thị theo chiều dọc
-                  WebkitLineClamp: 2, // 👈 giới hạn 2 dòng
-                  overflow: "hidden",
-                   textOverflow: "ellipsis", 
-                  height: "3rem", // 👈 đảm bảo mọi card cao bằng nhau 
-                  }} color="inherit" variant="body1"  fontWeight="600" to={`/san-pham-chi-tiet/${product.slug}`}>
+          <Typography
+            component={RouteLink}
+            onClick={handleViewProduct} // Thêm sự kiện này
+            sx={{
+              textDecoration: "none",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 2,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              height: "3rem",
+            }}
+            color="inherit"
+            variant="body1"
+            fontWeight="600"
+            to={`/san-pham-chi-tiet/${product.slug}`}
+          >
             {product.product_name}
           </Typography>
           <Typography variant="h6" color="black" fontWeight={700}>
-
             {product.price.toLocaleString()} ₫
           </Typography>
           <Box mt={1}>
