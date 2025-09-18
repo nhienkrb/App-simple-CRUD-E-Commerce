@@ -111,7 +111,7 @@ export default function TeaAccessoriesSection() {
             </Slider>
           </Box>
              <Box sx={{textAlign:"center" }} >
-            <Link to={"#"} style={{color:"#8c181e", textDecoration:"none", textTransform:"capitalize", fontWeight:"bold"}}>
+            <Link to={"/san-pham/phu-kien-tra"} style={{color:"#8c181e", textDecoration:"none", textTransform:"capitalize", fontWeight:"bold"}}>
               Xem Tất cả sản phẩm  <ArrowForwardIosIcon fontSize="small"   />
             </Link>
           </Box>

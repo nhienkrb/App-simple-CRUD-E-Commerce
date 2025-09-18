@@ -10,17 +10,17 @@ const products = [
   {
     name: "Bạch Trà Shan Tuyết",
     image:
-      "https://bachlien.vn/wp-content/uploads/2024/02/tra-shan-tuyet-co-thu-ta-xua-son-la-4.jpg",
+      "https://bachlien.vn/wp-content/uploads/2025/08/tra-shan-tuyet-co-thu-17.jpg",
   },
   {
     name: "Hồng Trà Shan Tuyết",
     image:
-      "https://bachlien.vn/wp-content/uploads/2024/02/tra-shan-tuyet-co-thu-ta-xua-son-la-4.jpg",
+      "https://bachlien.vn/wp-content/uploads/2025/08/hong-tra-shan-tuyet-9.jpg",
   },
   {
     name: "Lục Trà Shan Tuyết",
     image:
-      "https://bachlien.vn/wp-content/uploads/2024/02/tra-shan-tuyet-co-thu-ta-xua-son-la-4.jpg",
+      "https://bachlien.vn/wp-content/uploads/2024/12/tra-shan-tuyet-co-thu-43.jpg",
   },
 ];
 
@@ -54,6 +54,7 @@ export default function GiftSection() {
                 textAlign: "center",
                 p: 1,
                 "&:hover": { boxShadow: 3 },
+                cursor: "pointer"
               }}
             >
               <Box

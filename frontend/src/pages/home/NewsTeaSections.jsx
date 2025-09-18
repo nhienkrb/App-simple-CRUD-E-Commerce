@@ -12,17 +12,17 @@ const newsArticles = [
   {
     title: "Kỷ niệm 80 năm Quốc khánh nước Cộng hoà xã hội chủ nghĩa Việt Nam",
     snippet: "ĐỘC LẬP – TỰ DO – HẠNH PHÚC | 80 năm đã đi qua...",
-    image: "https://bachlien.vn/wp-content/uploads/2025/06/tra-shan-tuyet-yen-bai.jpg",
+    image: "https://bachlien.vn/wp-content/uploads/2025/02/CMNM2025-2048x1024.jpg",
   },
   {
     title: "Thông báo lịch nghỉ Tết Nguyên Đán Ất Tỵ 2025",
     snippet: "Kính gửi Quý khách hàng! Chào đón Tết Nguyên Đán...",
-    image: "https://bachlien.vn/wp-content/uploads/2025/06/tra-shan-tuyet-yen-bai.jpg",
+    image: "https://bachlien.vn/wp-content/uploads/2025/02/CMNM2025-2048x1024.jpg",
   },
   {
     title: "Chính sách kiểm hàng tại Bách Liên",
     snippet: "Định nghĩa Kiểm hàng là thực hiện các công việc kiểm tra...",
-    image: "https://bachlien.vn/wp-content/uploads/2025/06/tra-shan-tuyet-yen-bai.jpg",
+    image: "https://bachlien.vn/wp-content/uploads/2024/06/chinh-sach-kiem-hang.jpg",
   },
 ];
 
@@ -35,12 +35,12 @@ const teaArticles = [
   {
     title: "Trà đạo – Xu hướng sống chậm của giới trẻ thời 4.0",
     snippet: "Trong bối cảnh nhịp sống hối hả...",
-    image: "https://bachlien.vn/wp-content/uploads/2025/06/tra-shan-tuyet-yen-bai.jpg",
+    image: "https://bachlien.vn/wp-content/uploads/2025/04/xu-huong-tra-dao.jpg",
   },
   {
     title: "Giải mã sự quý hiếm và giá trị cực cao của trà Phổ Nhĩ Trung Quốc",
     snippet: "Trà Phổ Nhĩ nổi tiếng với hương vị đặc trưng...",
-    image: "https://bachlien.vn/wp-content/uploads/2025/06/tra-shan-tuyet-yen-bai.jpg",
+    image: "https://bachlien.vn/wp-content/uploads/2024/11/tra-pho-nhi-banh-1.jpg",
   },
 ];
 
